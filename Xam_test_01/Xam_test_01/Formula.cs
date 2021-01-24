@@ -38,43 +38,43 @@ namespace Xam_test_01
         private void PitanjeVrijeme()
         {
             Pitanje = $"Za koliko vremena je tijelo nešto pri brzini { Brzina } m/s ako je akcleracija iznosila { Akceleracija } m/s2?";
-            IzracunVremena();
+            IzracunVremena(Brzina, Akceleracija);
             PrvaNepoznanica = $"v = { Brzina } m/s";
             DrugaNepoznanica = $"a = { Akceleracija } m/s2";
-            Odgovor = $"t = { Vrijeme } s";
+            Odgovor = $"t = { Math.Round(Vrijeme, 2) } s";
         }
 
-        private void IzracunVremena()
+        private void IzracunVremena(double brzina, double akceleracija)
         {
-            Vrijeme = Brzina / Akceleracija;
+            Vrijeme = brzina / akceleracija;
         }
 
         private void PitanjeBrzina()
         {
             Pitanje = $"Kojom se brzinom tijelo kreće, ako je akceleracija bila { Akceleracija } m/s2 i tralajala je { Vrijeme } s?";
-            IzracunBrzine();
+            IzracunBrzine(Akceleracija, Vrijeme);
             PrvaNepoznanica = $"a = { Akceleracija } m/s2";
             DrugaNepoznanica = $"t = { Vrijeme } s";
-            Odgovor = $"v = { Brzina } m/s";
+            Odgovor = $"v = { Math.Round(Brzina, 2) } m/s";
         }
 
-        private void IzracunBrzine()
+        private void IzracunBrzine(double akceleracija, double vrijeme)
         {
-            Brzina = Akceleracija * Vrijeme;
+            Brzina = akceleracija * vrijeme;
         }
 
         private void PitanjeAkceleracija()
         {
             Pitanje = $"U vremenskom intervalu { Vrijeme } s tijelu se poveča brzina za { Brzina } m/s. Koliko je akceleracija tijela?";
-            IzracunAkceleracije();
+            IzracunAkceleracije(Brzina, Vrijeme);
             PrvaNepoznanica = $"v = { Brzina } m/s";
             DrugaNepoznanica = $"t = { Vrijeme } s";
-            Odgovor = $"a = { Akceleracija } m/s2";
+            Odgovor = $"a = { Math.Round(Akceleracija, 2)} m/s2";
         }
 
-        private void IzracunAkceleracije()
+        private void IzracunAkceleracije(double brzina, double vrijeme)
         {
-            Akceleracija = Brzina / Vrijeme;
+            Akceleracija = brzina / vrijeme;
         }
 
         private void RandomBrojevi()
