@@ -10,8 +10,12 @@ namespace Xam_test_01
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
-        }
+            MainPage = new NavigationPage(new PrvaStranica())
+            {
+                BarBackgroundColor = Color.DarkOrange
+            };
+        } 
+    
 
         protected override void OnStart()
         {
