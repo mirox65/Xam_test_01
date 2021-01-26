@@ -19,10 +19,10 @@ namespace Xam_test_01
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            prvaNepoznanica.IsVisible = false;
-            drugaNepoznanica.IsVisible = false;
-            trecaNepoznanica.IsVisible = false;
-            odgovor.IsVisible = false;
+            //prvaNepoznanica.IsVisible = false;
+            //drugaNepoznanica.IsVisible = false;
+            //trecaNepoznanica.IsVisible = false;
+            //odgovor.IsVisible = false;
             formula.GeneriranjePitanja();
             pitanje.Text = formula.Pitanje;
             gumbOdgovor.IsVisible = true;
@@ -30,13 +30,13 @@ namespace Xam_test_01
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            prvaNepoznanica.Text = formula.PrvaNepoznanica;
-            drugaNepoznanica.Text = formula.DrugaNepoznanica;
-            odgovor.Text = formula.Odgovor;
-            prvaNepoznanica.IsVisible = true;
-            drugaNepoznanica.IsVisible = true;
-            trecaNepoznanica.IsVisible = true;
-            odgovor.IsVisible = true;
+            //prvaNepoznanica.Text = formula.PrvaNepoznanica;
+            //drugaNepoznanica.Text = formula.DrugaNepoznanica;
+            //odgovor.Text = formula.Odgovor;
+            //prvaNepoznanica.IsVisible = true;
+            //drugaNepoznanica.IsVisible = true;
+            //trecaNepoznanica.IsVisible = true;
+            //odgovor.IsVisible = true;
             gumbOdgovor.IsVisible = false;
         }
     }
