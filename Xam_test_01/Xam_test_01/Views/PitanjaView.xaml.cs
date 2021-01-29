@@ -46,7 +46,8 @@ namespace Xam_test_01.Views
             var generirajPitanjeButton = new Button
             {
                 Text = "Generator pitanja",
-                BackgroundColor = Color.FromRgb(255, 204, 153)
+                BackgroundColor = Color.FromRgb(255, 204, 153),
+                TextColor = Color.Black
             };
 
             generirajPitanjeButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.GenerirajPitanjeCommand));
@@ -55,6 +56,7 @@ namespace Xam_test_01.Views
             {
                 Text = "Prikaži riješenje",
                 BackgroundColor = Color.FromRgb(204, 255, 153),
+                TextColor = Color.Black,
                 IsVisible = false
             };
 

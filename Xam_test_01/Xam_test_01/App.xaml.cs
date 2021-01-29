@@ -11,7 +11,8 @@ namespace Xam_test_01
 
             MainPage = new NavigationPage(new TipView())
             {
-                BarBackgroundColor = Color.FromRgb(40, 204, 255)
+                BarBackgroundColor = Color.FromRgb(40, 204, 255),
+                BarTextColor = Color.Black
             };
         }
 
