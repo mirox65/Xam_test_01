@@ -16,7 +16,8 @@ namespace Xam_test_01.Views
             var pitanjaButton = new Button
             {
                 Text = "Generator pitanja",
-                BackgroundColor = Color.FromRgb(255, 204, 153)
+                BackgroundColor = Color.FromRgb(255, 204, 153),
+                TextColor = Color.Black
             };
 
             pitanjaButton.SetBinding(Button.CommandProperty, nameof(TipViewModel.PitanjeCommand));
@@ -24,7 +25,8 @@ namespace Xam_test_01.Views
             var korakButton = new Button
             {
                 Text = "Korak po korak",
-                BackgroundColor = Color.FromRgb(255, 204, 153)
+                BackgroundColor = Color.FromRgb(255, 204, 153),
+                TextColor = Color.Black
             };
 
             korakButton.SetBinding(Button.CommandProperty, nameof(TipViewModel.KorakCommand));

@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Xam_test_01.ViewModels
 {
-    public class TipViewModel : INotifyPropertyChanged
+    public class TipViewModel
     {
 
         public TipViewModel()
@@ -20,7 +20,6 @@ namespace Xam_test_01.ViewModels
             });
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Command PitanjeCommand { get; }
 
