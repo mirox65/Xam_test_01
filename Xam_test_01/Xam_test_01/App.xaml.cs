@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Xam_test_01.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Xam_test_01
 {
@@ -10,12 +9,12 @@ namespace Xam_test_01
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new PrvaStranica())
+            MainPage = new NavigationPage(new TipView())
             {
                 BarBackgroundColor = Color.DarkOrange
             };
-        } 
-    
+        }
+
 
         protected override void OnStart()
         {
