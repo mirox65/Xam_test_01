@@ -16,7 +16,7 @@ namespace Xam_test_01.Views
             var temaKinematikaButton = new Button
             {
                 Text = "Kinematika",
-                BackgroundColor = Color.FromRgb(233, 164, 22)
+                BackgroundColor = Color.FromRgb(255, 204, 153)
             };
 
             temaKinematikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeKinematikaCommand));
@@ -24,7 +24,7 @@ namespace Xam_test_01.Views
             var temaDinamikaButton = new Button
             {
                 Text = "Dinamika",
-                BackgroundColor = Color.FromRgb(233, 164, 22)
+                BackgroundColor = Color.FromRgb(255, 204, 153)
             };
 
             temaDinamikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeDinamikaCommand));
