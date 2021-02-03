@@ -58,7 +58,7 @@ namespace Xam_test_01
 
         private void PitanjeBrzina()
         {
-            Pitanje = $"Kojom se brzinom tijelo kreće, ako je akceleracija bila { Akceleracija } m/s2 i tralajala je { Vrijeme } s?";
+            Pitanje = $"Kojom se brzinom tijelo kreče, ako je akceleracija bila { Akceleracija } m/s2 i tralajala je { Vrijeme } s?";
             IzracunBrzine(Akceleracija, Vrijeme);
             StoRacunamo = "v=?";
             FormulaZaIspis = "v=a*t";
@@ -75,7 +75,7 @@ namespace Xam_test_01
 
         private void PitanjeAkceleracija()
         {
-            Pitanje = $"U vremenskom intervalu { Vrijeme } s tijelu se poveča brzina za { Brzina } m/s. Koliko je akceleracija tijela?";
+            Pitanje = $"U vremenskom intervalu { Vrijeme } s tijelu se poveća brzina za { Brzina } m/s. Koliko je akceleracija tijela?";
             IzracunAkceleracije(Brzina, Vrijeme);
             StoRacunamo = "a=?";
             FormulaZaIspis = "a=v/t";

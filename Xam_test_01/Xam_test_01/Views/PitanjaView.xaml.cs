@@ -9,6 +9,8 @@ namespace Xam_test_01.Views
     {
         public PitanjaView()
         {
+            var pitanje = new Pitanje();
+
             BindingContext = new PitanjaViewModel();
 
             Title = "Kinematika";
@@ -46,8 +48,10 @@ namespace Xam_test_01.Views
             var generirajPitanjeButton = new Button
             {
                 Text = "Generator pitanja",
-                BackgroundColor = Color.FromRgb(255, 204, 153),
-                TextColor = Color.Black
+                BackgroundColor = pitanje.PrimarnaBoja,
+                TextColor = Color.Black,
+                TextTransform = TextTransform.Uppercase,
+                FontSize = 18
             };
 
             generirajPitanjeButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.GenerirajPitanjeCommand));
@@ -55,8 +59,10 @@ namespace Xam_test_01.Views
             var prikaziOdgovorButton = new Button
             {
                 Text = "Prikaži riješenje",
-                BackgroundColor = Color.FromRgb(204, 255, 153),
+                BackgroundColor = pitanje.NavigacijaDrugaBoja,
                 TextColor = Color.Black,
+                TextTransform = TextTransform.Uppercase,
+                FontSize = 18,
                 IsVisible = false
             };
 
@@ -106,7 +112,7 @@ namespace Xam_test_01.Views
                 var frame = new Frame
                 {
                     VerticalOptions = LayoutOptions.Center,
-                    Content = textLable
+                    Content = textLable                   
                 };
 
                 return new StackLayout
@@ -126,13 +132,16 @@ namespace Xam_test_01.Views
 
             private static StackLayout LoadTemplate()
             {
+                var pitanje = new Pitanje();
                 var textLable = new Label();
+                textLable.FontSize = 18;
                 textLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziGeneriranoPitanje));
 
                 var frame = new Frame
                 {
                     VerticalOptions = LayoutOptions.Center,
-                    Content = textLable
+                    Content = textLable,
+                    BackgroundColor = pitanje.PrimarnaBoja
                 };
 
                 return new StackLayout

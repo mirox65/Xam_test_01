@@ -1,4 +1,5 @@
-﻿using Xam_test_01.ViewModels;
+﻿using Xam_test_01.Models;
+using Xam_test_01.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,8 @@ namespace Xam_test_01.Views
     {
         public TemeView()
         {
+            var pitanje = new Pitanje();
+
             BindingContext = new TemeViewModel();
 
             Title = "Teme";
@@ -16,8 +19,10 @@ namespace Xam_test_01.Views
             var temaKinematikaButton = new Button
             {
                 Text = "Kinematika",
-                BackgroundColor = Color.FromRgb(255, 204, 153),
-                TextColor = Color.Black
+                BackgroundColor = pitanje.PrimarnaBoja,
+                TextColor = Color.Black,
+                TextTransform = TextTransform.Uppercase,
+                FontSize = 18
             };
 
             temaKinematikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeKinematikaCommand));
@@ -25,8 +30,10 @@ namespace Xam_test_01.Views
             var temaDinamikaButton = new Button
             {
                 Text = "Dinamika",
-                BackgroundColor = Color.FromRgb(255, 204, 153),
-                TextColor = Color.Black
+                BackgroundColor = pitanje.PrimarnaBoja,
+                TextColor = Color.Black,
+                TextTransform = TextTransform.Uppercase,
+                FontSize = 18
             };
 
             temaDinamikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeDinamikaCommand));
