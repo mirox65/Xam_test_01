@@ -1,4 +1,5 @@
-﻿using Xam_test_01.ViewModels;
+﻿using Xam_test_01.Models;
+using Xam_test_01.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,15 +10,19 @@ namespace Xam_test_01.Views
     {
         public TipView()
         {
+            var pitanje = new Pitanje();
+
             BindingContext = new TipViewModel();
 
-            Title = "Tip vjezbe";
+            Title = "Tip vježbe";
 
             var pitanjaButton = new Button
             {
                 Text = "Generator pitanja",
-                BackgroundColor = Color.FromRgb(255, 204, 153),
-                TextColor = Color.Black
+                TextTransform = TextTransform.Uppercase,
+                BackgroundColor = pitanje.PrimarnaBoja,
+                TextColor = Color.Black,
+                FontSize = 18
             };
 
             pitanjaButton.SetBinding(Button.CommandProperty, nameof(TipViewModel.PitanjeCommand));
@@ -25,8 +30,10 @@ namespace Xam_test_01.Views
             var korakButton = new Button
             {
                 Text = "Korak po korak",
-                BackgroundColor = Color.FromRgb(255, 204, 153),
-                TextColor = Color.Black
+                TextTransform = TextTransform.Uppercase,
+                BackgroundColor = pitanje.PrimarnaBoja,
+                TextColor = Color.Black,
+                FontSize = 18
             };
 
             korakButton.SetBinding(Button.CommandProperty, nameof(TipViewModel.KorakCommand));
@@ -34,7 +41,6 @@ namespace Xam_test_01.Views
             var grid = new Grid
             {
                 Margin = new Thickness(10, 20),
-                BackgroundColor = Color.FromRgb(243, 242, 242),
 
                 ColumnDefinitions =
                 {

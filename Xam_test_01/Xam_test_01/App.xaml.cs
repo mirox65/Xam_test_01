@@ -1,4 +1,5 @@
-﻿using Xam_test_01.Views;
+﻿using Xam_test_01.Models;
+using Xam_test_01.Views;
 using Xamarin.Forms;
 
 namespace Xam_test_01
@@ -7,12 +8,15 @@ namespace Xam_test_01
     {
         public App()
         {
+            var pitanje = new Pitanje();
+
             InitializeComponent();
 
             MainPage = new NavigationPage(new TipView())
             {
-                BarBackgroundColor = Color.FromRgb(40, 204, 255),
-                BarTextColor = Color.Black
+                BarBackgroundColor = pitanje.NavigacijaDrugaBoja,
+                BarTextColor = Color.Black,
+                BackgroundColor = pitanje.GridBackColor
             };
         }
 
