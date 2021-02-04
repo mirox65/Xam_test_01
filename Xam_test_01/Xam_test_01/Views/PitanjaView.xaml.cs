@@ -29,21 +29,6 @@ namespace Xam_test_01.Views
 
             collectionViewOdgovor.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.OdgovorCollection));
 
-            //var textLablePitanje = new Label
-            //{
-            //    Text = "Pitanje",
-            //    FontSize = 16,
-            //    Margin = new Thickness(15)
-            //};
-
-            //textLablePitanje.SetBinding(Label.TextProperty, nameof(PitanjaViewModel.LablePitanja));
-
-            //var textLableOdgovor = new Label
-            //{
-            //    Text = "Odgovor",
-            //    FontSize = 16,
-            //    Margin = new Thickness(15)
-            //};
 
             var generirajPitanjeButton = new Button
             {
@@ -87,8 +72,6 @@ namespace Xam_test_01.Views
                 }
             };
 
-            //grid.Children.Add(textLablePitanje, 0, 0);
-            //grid.Children.Add(textLableOdgovor, 0, 1);
             grid.Children.Add(collectionViewPitanje, 0, 0);
             grid.Children.Add(collectionViewOdgovor, 0, 1);
             grid.Children.Add(prikaziOdgovorButton, 0, 2);
