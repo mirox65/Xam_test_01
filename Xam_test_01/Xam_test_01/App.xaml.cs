@@ -1,4 +1,4 @@
-﻿using Xam_test_01.Models;
+﻿using Xam_test_01.Pomocne;
 using Xam_test_01.Views;
 using Xamarin.Forms;
 
@@ -8,15 +8,15 @@ namespace Xam_test_01
     {
         public App()
         {
-            var pitanje = new Pitanje();
+            var zajednickiElementi = new ZajednickiElementiAplikacije();
 
             InitializeComponent();
 
             MainPage = new NavigationPage(new TipView())
             {
-                BarBackgroundColor = pitanje.NavigacijaDrugaBoja,
+                BarBackgroundColor = zajednickiElementi.NavigacijaDrugaBoja,
                 BarTextColor = Color.Black,
-                BackgroundColor = pitanje.GridBackColor
+                BackgroundColor = zajednickiElementi.GridBackColor
             };
         }
 

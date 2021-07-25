@@ -1,4 +1,5 @@
-﻿using Xam_test_01.Views;
+﻿using System.Windows.Input;
+using Xam_test_01.Views;
 using Xamarin.Forms;
 
 namespace Xam_test_01.ViewModels
@@ -7,20 +8,20 @@ namespace Xam_test_01.ViewModels
     {
         public TemeViewModel()
         {
-            TemeKinematikaCommand = new Command(async () =>
+            TemeKinematikaCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PitanjaView());
+                await Application.Current.MainPage.Navigation.PushAsync(new PitanjaView(param));
             });
 
-            //TemeDinamikaCommand = new Command(async () =>
-            //{
-            //    await Application.Current.MainPage.Navigation.PushAsync(new Page());
-            //});
+            TemeDinamikaCommand = new Command<string>(async param =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new PitanjaView(param));
+            });
 
         }
 
-        public Command TemeKinematikaCommand { get; }
-        public Command TemeDinamikaCommand { get; }
+        public ICommand TemeKinematikaCommand { get; }
+        public ICommand TemeDinamikaCommand { get; }
 
     }
 }

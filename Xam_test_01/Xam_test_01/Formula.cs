@@ -18,7 +18,7 @@ namespace Xam_test_01
         public string Odgovor { get; set; }
         public ArrayList OdgovorArray { get; set; }
 
-        readonly Random random = new Random();
+        private readonly Random random = new Random();
 
         public void GeneriranjePitanja()
         {
