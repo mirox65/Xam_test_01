@@ -11,52 +11,41 @@ namespace Xam_test_01.Views
 {
     public class PitanjaViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// ViewModel pomoćna klasa View-a pitanje ovdje se odrađuje sva poslovna logika. Podižu se komande i sav kod koji dolazi sa View.
-        /// ViewModel priprema i vraća obrađene podatke View-u u koje se prikazuju elementi korisniku.
-        /// Najbitiniji property je commandproperty koji se nalazi u navigacijskom gumbu, te po njegovoj vrijendosti se dalje određuje koja će se tema koristit.
-        /// </summary>
-        /// 
-
-        // Instanciranje klase odabirGranePitanja koja se poziva i priedaje se string s temom pitanja koju će popratne klase vratiti korisniku kao pitanje.
+        Formula formula = new Formula();
         private readonly OdabirGranaPitanja odabirGranaPitanja = new OdabirGranaPitanja();
 
         public PitanjaViewModel()
         {
-            // Instanciranje kolekcija u kojima će se spremati vrijednosti generiranih pitanja i odgovora. Ova kolekcija se nadgleda te po promjeni vrijendosti ažurira.
             PitanjeCollection = new ObservableCollection<Pitanje>();
             OdgovorCollection = new ObservableCollection<Pitanje>();
             ObavijestKorisnikuCollection = new ObservableCollection<Pitanje>();
             MjernaJedinicaOdgovoraCollection = new ObservableCollection<Pitanje>();
 
-
-            // Komanda koja se poziva pritiskom na navigacijski gumb Novo pitanje
-            // Gumb prosljeđuje parametar naziv teme kao string koji se koristi prilokom generiranja pitanja u istomenoj klasi
             GenerirajPitanjeCommand = new Command<string>(param =>
-                {
-                    PitanjeCollection.Clear();
-                    OdgovorCollection.Clear();
-                    ObavijestKorisnikuCollection.Clear();
-                    MjernaJedinicaOdgovoraCollection.Clear();
-                    IsVisible = true;
-                    OdgovorKorisnika = string.Empty;
-                    IsEnabledRiješenje = false;
-                    odabirGranaPitanja.GeneriranjePitanja(param);
+            {
+                PitanjeCollection.Clear();
+                OdgovorCollection.Clear();
+                ObavijestKorisnikuCollection.Clear();
+                MjernaJedinicaOdgovoraCollection.Clear();
+                IsVisible = true;
+                OdgovorKorisnika = string.Empty;
+                IsEnabledRiješenje = false;
+                odabirGranaPitanja.GeneriranjePitanja(param);
 
-                    var pitanje = new Pitanje
-                    {
-                        PrikaziGeneriranoPitanje = odabirGranaPitanja.Pitanje
-                    };
-                    PitanjeCollection.Add(pitanje);
-                    var mjernaJedinica = new Pitanje
-                    {
-                        MjernaJedinicaOdgovora = $"Unesi odgovor u {odabirGranaPitanja.MjernaJedinicaOdgvora}"
-                    };
-                    MinVrijednostRješnja = odabirGranaPitanja.MinVrijednostRješenja;
-                    MaxVrijednostRješenja = odabirGranaPitanja.MaxVrijednostRješenja;
-                    MjernaJedinicaOdgovoraCollection.Add(mjernaJedinica);
-                    IsEnabledProvjeriOdgovor = true;
-                });
+                var pitanje = new Pitanje
+                {
+                    PrikaziGeneriranoPitanje = odabirGranaPitanja.Pitanje
+                };
+                PitanjeCollection.Add(pitanje);
+                var mjernaJedinica = new Pitanje
+                {
+                    MjernaJedinicaOdgovora = $"Unesi odgovor u {odabirGranaPitanja.MjernaJedinicaOdgvora}"
+                };
+                MinVrijednostRješnja = odabirGranaPitanja.MinVrijednostRješenja;
+                MaxVrijednostRješenja = odabirGranaPitanja.MaxVrijednostRješenja;
+                MjernaJedinicaOdgovoraCollection.Add(mjernaJedinica);
+                IsEnabledProvjeriOdgovor = true;
+            });
 
             ProvjeriOdgovorCommand = new Command(() =>
             {
@@ -81,9 +70,6 @@ namespace Xam_test_01.Views
                 IsEnabledRiješenje = true;
             });
 
-
-            // Komanda koja se poziva pritiskom na gumb prikaži odgovor te time prikazuje točno rješenje korisniku.
-            // I ovoj metodi se određuje je li gumb vidljiv korisnik ili ne.
             PrikaziOdgovorCommand = new Command(() =>
             {
                 foreach (var element in odabirGranaPitanja.OdgovorArray)
@@ -96,45 +82,6 @@ namespace Xam_test_01.Views
                 }
                 IsEnabledProvjeriOdgovor = false;
             });
-        }
-
-        // Full property za label odgovor koji se generiraju u samam View-u.
-        private string labelOdgovor;
-
-        public string LabelOdgovor
-        {
-            get => labelOdgovor;
-            set
-            {
-                labelOdgovor = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LabelOdgovor));
-            }
-        }
-
-        // Full properti za label pitanje koji se generira u samm View-u
-        private string lablePitanja;
-
-        public string LablePitanja
-        {
-            get => lablePitanja;
-            set
-            {
-                lablePitanja = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LablePitanja));
-            }
-        }
-
-        // Full property za odogovr korsnika. Unosom vrijednosti na View-u vrijednost property-a se mijenja te se na pritisak gumba provjeri rješenje uspoređuje sa sistemskim rješenjem.
-        private string odgovorKorisnika;
-
-        public string OdgovorKorisnika
-        {
-            get => odgovorKorisnika;
-            set
-            {
-                odgovorKorisnika = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(OdgovorKorisnika));
-            }
         }
 
         public double OdgovorKorisnikaDouble { get; set; }
@@ -162,6 +109,42 @@ namespace Xam_test_01.Views
             set { maxVrijesnotRješenja = value; }
         }
 
+        private string odgovorKorisnika;
+
+        public string OdgovorKorisnika
+        {
+            get => odgovorKorisnika;
+            set
+            {
+                odgovorKorisnika = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(OdgovorKorisnika));
+            }
+        }
+
+        string labelOdgovor;
+
+        public string LabelOdgovor
+        {
+            get => labelOdgovor;
+            set
+            {
+                labelOdgovor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LabelOdgovor));
+            }
+        }
+
+        string lablePitanja;
+
+
+        public string LablePitanja
+        {
+            get => lablePitanja;
+            set
+            {
+                lablePitanja = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LablePitanja));
+            }
+        }
 
         private string obavjestNakonOdgovora;
 
@@ -175,20 +158,17 @@ namespace Xam_test_01.Views
             }
         }
 
-
-        // Full Boolean property koji se postavlja na istinto ukoliko element treba biti prikazan korsniku.
-        private bool isVisible;
+        bool isVisible;
 
         public bool IsVisible
         {
-            get { return isVisible; }
-            set 
-            { 
+            get => isVisible;
+            set
+            {
                 isVisible = value;
                 OnPropertyChanged();
             }
         }
-
 
         private bool isEnabledProvjeriOdgovor;
 
@@ -207,15 +187,12 @@ namespace Xam_test_01.Views
         public bool IsEnabledRiješenje
         {
             get { return isEnabledRiješenje; }
-            set 
-            { 
+            set
+            {
                 isEnabledRiješenje = value;
                 OnPropertyChanged();
             }
         }
-
-
-        // Property promjena vrijednosti koji se dobije kroz interfejs koji je vezan za klasu.
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -224,7 +201,6 @@ namespace Xam_test_01.Views
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Preko ovih paprametara View dolazi do vrijednosti komandi i kolekcija koje prikazuje korisniku.
         public ObservableCollection<Pitanje> OdgovorCollection { get; }
         public ObservableCollection<Pitanje> PitanjeCollection { get; }
         public ObservableCollection<Pitanje> ObavijestKorisnikuCollection { get; }
@@ -232,6 +208,5 @@ namespace Xam_test_01.Views
         public ICommand GenerirajPitanjeCommand { get; }
         public ICommand PrikaziOdgovorCommand { get; }
         public ICommand ProvjeriOdgovorCommand { get; }
-
     }
 }
