@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xam_test_01.Views.TemeView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+<!--ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:Xam_test_01.Views"
+             xmlns:viewmodels="clr-namespace:Xam_test_01.ViewModels" 
+             xmlns:model="clr-namespace:Xam_test_01.Models"
+             x:Class="Xam_test_01.Views.PrikazRjesenjaView"
+             x:DataType="viewmodels:PrikazRjesenjaViewModel">
+    <ContentPage.BindingContext>
+        <viewmodels:PrikazRjesenjaViewModel/>
+    </ContentPage.BindingContext>
+
+    <ListView ItemsSource="{Binding Rjesenje}"
+              HasUnevenRows="True"
+              SeparatorVisibility="None"
+              SelectionMode="None"
+              Margin="0,5,0,0">
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="model:Pitanje">
+                <ViewCell>
+                    <Grid Padding="20, 5">
+                        <Frame CornerRadius="3"
+                               BackgroundColor="LightGoldenrodYellow">
+                            <StackLayout>
+                                <Label Text="{Binding PrikaziOdgovorNaPitanje}" 
+                                       FontSize="18"/>
+                            </StackLayout>
+                        </Frame>                        
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <Button Text="Test"
+                    Margin="10"
+                    HeightRequest="70"/>
+        </ListView.Footer>
+    </ListView>
+    
+</ContentPage>-->

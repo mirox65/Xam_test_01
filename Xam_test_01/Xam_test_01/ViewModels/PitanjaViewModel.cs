@@ -5,9 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
+using Xam_test_01.Views;
 using Xamarin.Forms;
 
-namespace Xam_test_01.Views
+namespace Xam_test_01.ViewModels
 {
     public class PitanjaViewModel : INotifyPropertyChanged
     {
@@ -54,7 +55,8 @@ namespace Xam_test_01.Views
                 {
                     var obavjest = new Pitanje
                     {
-                        ObavjestNakonOdgovora = "Točno"
+                        ObavjestNakonOdgovora = "Točno",
+                        BojaPozdaineOdgovora = Color.LightGreen
                     };
                     ObavijestKorisnikuCollection.Add(obavjest);
                 }
@@ -62,7 +64,8 @@ namespace Xam_test_01.Views
                 {
                     var obavjest = new Pitanje
                     {
-                        ObavjestNakonOdgovora = "Netočno"
+                        ObavjestNakonOdgovora = "Netočno",
+                        BojaPozdaineOdgovora = Color.LightPink
                     };
                     ObavijestKorisnikuCollection.Add(obavjest);
                 }
@@ -70,7 +73,7 @@ namespace Xam_test_01.Views
                 IsEnabledRiješenje = true;
             });
 
-            PrikaziOdgovorCommand = new Command(() =>
+            PrikaziOdgovorCommand = new Command<string>(async param =>
             {
                 foreach (var element in odabirGranaPitanja.OdgovorArray)
                 {
@@ -80,7 +83,7 @@ namespace Xam_test_01.Views
                     };
                     OdgovorCollection.Add(odgovor);
                 }
-                IsEnabledProvjeriOdgovor = false;
+                await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView(param, odabirGranaPitanja.OdgovorArray));
             });
         }
 
