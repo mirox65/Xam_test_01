@@ -1,5 +1,6 @@
 ﻿using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
+using Xam_test_01.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,8 @@ namespace Xam_test_01.Views
 
         // Properti za nazive gumba koji se generira iz zajedeničke metode aplikacije
         private readonly string novoPitanje = "Novo pitanje";
+        private readonly string prikaziRiješenjeButton = "Prikaži riješenje";
+        private readonly string prikaziRješenjeNaziv = "Rješenje zadatka";
 
         public PitanjaView(string nazivGraneNavigacija)
         {
@@ -44,7 +47,7 @@ namespace Xam_test_01.Views
             {
                 Placeholder = "Unesi odgovor",
                 BackgroundColor = Color.White,
-                Margin = new Thickness(20,10),
+                Margin = new Thickness(20, 10),
             };
             unosOdgovora.SetBinding(Entry.TextProperty, "OdgovorKorisnika");
             unosOdgovora.SetBinding(IsVisibleProperty, nameof(PitanjaViewModel.IsVisible));
@@ -80,14 +83,8 @@ namespace Xam_test_01.Views
             // Pošto je to jedini gumb ovih vrijednosti onda ga ne generiramo iz zajedničkih elelemnata
             // Ali pošto koristi boje aplikacije da bi se održala uniformiranost boju vuče iz zajedničkih elemenata
             // Gumb nije vidljiv dok se ne unese riješenje
-            var prikaziOdgovorButton = new Button
-            {
-                Text = "Prikaži riješenje",
-                BackgroundColor = zajednickiElementi.NavigacijaDrugaBoja,
-                TextColor = Color.Black,
-                TextTransform = TextTransform.Uppercase,
-                FontSize = 18,
-            };
+            var prikaziOdgovorButton = zajednickiElementi.PrimarniNavigacijskiButton(prikaziRiješenjeButton, prikaziRješenjeNaziv);
+            prikaziOdgovorButton.BackgroundColor = zajednickiElementi.NavigacijaDrugaBoja;
             prikaziOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.PrikaziOdgovorCommand));
             prikaziOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledRiješenje));
 
@@ -115,7 +112,7 @@ namespace Xam_test_01.Views
                     new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) },
                     new RowDefinition { Height = new GridLength(0.5, GridUnitType.Auto) },
                     new RowDefinition { Height = new GridLength(90, GridUnitType.Absolute) },
-                    new RowDefinition { Height = new GridLength(70, GridUnitType.Absolute) },
+                    new RowDefinition { Height = new GridLength(90, GridUnitType.Absolute) },
                     new RowDefinition { Height = new GridLength(70 , GridUnitType.Absolute) },
                     new RowDefinition { Height = new GridLength(70 , GridUnitType.Absolute) }
                 }
@@ -216,6 +213,8 @@ namespace Xam_test_01.Views
             private static StackLayout LoadTemplate()
             {
                 var zajednickiElementi = new ZajednickiElementiAplikacije();
+                var pitanja = new PitanjaViewModel();
+
                 var textLable = new Label
                 {
                     FontSize = 18
@@ -225,9 +224,9 @@ namespace Xam_test_01.Views
                 var frame = new Frame
                 {
                     VerticalOptions = LayoutOptions.Center,
-                    Content = textLable,
-                    BackgroundColor = zajednickiElementi.PrimarnaBoja
+                    Content = textLable
                 };
+                frame.SetBinding(BackgroundColorProperty, nameof(Pitanje.BojaPozdaineOdgovora));
 
                 return new StackLayout
                 {
