@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
+using Xam_test_01.Services;
 using Xam_test_01.Views;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace Xam_test_01.ViewModel
         Formula formula = new Formula();
         private readonly OdabirGranaPitanja odabirGranaPitanja = new OdabirGranaPitanja();
 
-        public PitanjaViewModel()
+        public PitanjaViewModel(string naziv, int level)
         {
             PitanjeCollection = new ObservableCollection<Pitanje>();
             OdgovorCollection = new ObservableCollection<Pitanje>();
@@ -48,8 +49,9 @@ namespace Xam_test_01.ViewModel
                 IsEnabledProvjeriOdgovor = true;
             });
 
-            ProvjeriOdgovorCommand = new Command(() =>
+            ProvjeriOdgovorCommand = new Command( async () =>
             {
+                int rezultat;
                 ConvertToDouble();
                 if (MinVrijednostRješnja <= OdgovorKorisnikaDouble && OdgovorKorisnikaDouble <= MaxVrijednostRješenja)
                 {
@@ -59,6 +61,7 @@ namespace Xam_test_01.ViewModel
                         BojaPozdaineOdgovora = Color.LightGreen
                     };
                     ObavijestKorisnikuCollection.Add(obavjest);
+                    rezultat = 1;
                 }
                 else
                 {
@@ -68,9 +71,11 @@ namespace Xam_test_01.ViewModel
                         BojaPozdaineOdgovora = Color.LightPink
                     };
                     ObavijestKorisnikuCollection.Add(obavjest);
+                    rezultat = 0;
                 }
                 IsEnabledProvjeriOdgovor = false;
                 IsEnabledRiješenje = true;
+                await DataBaseService.InsertInto(naziv, rezultat, level);
             });
 
             PrikaziOdgovorCommand = new Command<string>(async param =>
@@ -117,30 +122,6 @@ namespace Xam_test_01.ViewModel
             }
         }
 
-        string labelOdgovor;
-
-        public string LabelOdgovor
-        {
-            get => labelOdgovor;
-            set
-            {
-                labelOdgovor = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LabelOdgovor));
-            }
-        }
-
-        string lablePitanja;
-
-
-        public string LablePitanja
-        {
-            get => lablePitanja;
-            set
-            {
-                lablePitanja = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LablePitanja));
-            }
-        }
 
         private string obavjestNakonOdgovora;
 

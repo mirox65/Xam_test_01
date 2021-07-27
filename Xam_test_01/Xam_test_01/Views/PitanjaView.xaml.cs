@@ -1,5 +1,7 @@
-﻿using Xam_test_01.Models;
+﻿using System.Threading.Tasks;
+using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
+using Xam_test_01.Services;
 using Xam_test_01.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -22,11 +24,13 @@ namespace Xam_test_01.Views
 
         public PitanjaView(string nazivGraneNavigacija)
         {
+            int level = DataBaseService.SelectLevel(nazivGraneNavigacija).Result;
+
             // Instanciranje klase zajednicki elementi aplikacije koja sadrži unificirani gumb
             var zajednickiElementi = new ZajednickiElementiAplikacije();
 
             // Veza sa view modelom koji je potereban jer view model odrađuje poslovnu logiku aplikacije
-            BindingContext = new PitanjaViewModel();
+            BindingContext = new PitanjaViewModel(nazivGraneNavigacija, level);
 
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
@@ -61,16 +65,9 @@ namespace Xam_test_01.Views
 
             var obavjestNakonOdgovora = new CollectionView
             {
-                ItemTemplate = new LableObavjestOdgvorTemplate()
+                ItemTemplate = new LableObavjestOdogvorTemplate()
             };
             obavjestNakonOdgovora.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.ObavijestKorisnikuCollection));
-
-
-            var collectionViewOdgovor = new CollectionView
-            {
-                ItemTemplate = new LableOdgovorTemplate()
-            };
-            collectionViewOdgovor.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.OdgovorCollection));
 
             // Button za generiranje novog pitanja
             // Vezano je na ViewModel na ICommand GenerirajPitanjeCommand
@@ -122,8 +119,6 @@ namespace Xam_test_01.Views
             grid.Children.Add(collectionViewPitanje, 0, 0);
             Grid.SetColumnSpan(collectionViewPitanje, 2);
 
-            //grid.Children.Add(collectionViewOdgovor, 0, 1);
-
             grid.Children.Add(unosOdgovora, 0, 1);
             Grid.SetColumnSpan(unosOdgovora, 2);
 
@@ -145,31 +140,6 @@ namespace Xam_test_01.Views
             Content = grid;
         }
 
-        class LableOdgovorTemplate : DataTemplate
-        {
-            public LableOdgovorTemplate() : base(LoadOdgovorTemplate)
-            {
-
-            }
-
-            private static StackLayout LoadOdgovorTemplate()
-            {
-                var textLable = new Label();
-                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziOdgovorNaPitanje));
-
-                var frame = new Frame
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Content = textLable
-                };
-
-                return new StackLayout
-                {
-                    Children = { frame },
-                    Padding = new Thickness(10, 10)
-                };
-            }
-        }
 
         // Klasa za generiranje elementa stacklayout i label u kojem će se prikazati korisninku metoda se može iskoristiti i za prikaz više elementa bez if ili foreach petlje
         class LablePitanjeTemplate : DataTemplate
@@ -203,18 +173,15 @@ namespace Xam_test_01.Views
             }
         }
 
-        class LableObavjestOdgvorTemplate : DataTemplate
+        class LableObavjestOdogvorTemplate : DataTemplate
         {
-            public LableObavjestOdgvorTemplate() : base(LoadTemplate)
+            public LableObavjestOdogvorTemplate() : base(LoadTemplate)
             {
 
             }
 
             private static StackLayout LoadTemplate()
             {
-                var zajednickiElementi = new ZajednickiElementiAplikacije();
-                var pitanja = new PitanjaViewModel();
-
                 var textLable = new Label
                 {
                     FontSize = 18
@@ -246,6 +213,7 @@ namespace Xam_test_01.Views
             private static StackLayout LoadTemplate()
             {
                 var zajednickiElementi = new ZajednickiElementiAplikacije();
+
                 var textLable = new Label
                 {
                     FontSize = 18,
