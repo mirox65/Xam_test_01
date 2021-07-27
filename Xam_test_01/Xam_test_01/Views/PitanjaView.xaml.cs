@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Xam_test_01.Models;
+﻿using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
 using Xam_test_01.Services;
 using Xam_test_01.ViewModel;
@@ -24,7 +23,10 @@ namespace Xam_test_01.Views
 
         public PitanjaView(string nazivGraneNavigacija)
         {
-            int level = DataBaseService.SelectLevel(nazivGraneNavigacija).Result;
+
+            var level = DataBaseService.SelectLevel(nazivGraneNavigacija).Result;
+            var totalAnsswers = DataBaseService.SelectCount(nazivGraneNavigacija, level).Result;
+            var correctAnswers = DataBaseService.SelectCorrectCount(nazivGraneNavigacija, level).Result;
 
             // Instanciranje klase zajednicki elementi aplikacije koja sadrži unificirani gumb
             var zajednickiElementi = new ZajednickiElementiAplikacije();
@@ -34,7 +36,7 @@ namespace Xam_test_01.Views
 
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
-            Title = nazivGraneNavigacija;
+            Title = $"{ nazivGraneNavigacija } {level}. stupanj {correctAnswers}/{totalAnsswers}";
 
             // Kolekcija koja može biti i samo label jer sadrži vrijednost string pitanja koje se postavlja korsniku
             // Vezan je za ViewModel vrijednost pitanje kolekcija koji sadrži string i koji se vraća u view za prikaz korisniku
@@ -65,9 +67,16 @@ namespace Xam_test_01.Views
 
             var obavjestNakonOdgovora = new CollectionView
             {
-                ItemTemplate = new LableObavjestOdogvorTemplate()
+                ItemTemplate = new LableObavjestOdgvorTemplate()
             };
             obavjestNakonOdgovora.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.ObavijestKorisnikuCollection));
+
+
+            var collectionViewOdgovor = new CollectionView
+            {
+                ItemTemplate = new LableOdgovorTemplate()
+            };
+            collectionViewOdgovor.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.OdgovorCollection));
 
             // Button za generiranje novog pitanja
             // Vezano je na ViewModel na ICommand GenerirajPitanjeCommand
@@ -119,6 +128,8 @@ namespace Xam_test_01.Views
             grid.Children.Add(collectionViewPitanje, 0, 0);
             Grid.SetColumnSpan(collectionViewPitanje, 2);
 
+            //grid.Children.Add(collectionViewOdgovor, 0, 1);
+
             grid.Children.Add(unosOdgovora, 0, 1);
             Grid.SetColumnSpan(unosOdgovora, 2);
 
@@ -140,6 +151,31 @@ namespace Xam_test_01.Views
             Content = grid;
         }
 
+        class LableOdgovorTemplate : DataTemplate
+        {
+            public LableOdgovorTemplate() : base(LoadOdgovorTemplate)
+            {
+
+            }
+
+            private static StackLayout LoadOdgovorTemplate()
+            {
+                var textLable = new Label();
+                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziOdgovorNaPitanje));
+
+                var frame = new Frame
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Content = textLable
+                };
+
+                return new StackLayout
+                {
+                    Children = { frame },
+                    Padding = new Thickness(10, 10)
+                };
+            }
+        }
 
         // Klasa za generiranje elementa stacklayout i label u kojem će se prikazati korisninku metoda se može iskoristiti i za prikaz više elementa bez if ili foreach petlje
         class LablePitanjeTemplate : DataTemplate
@@ -173,9 +209,9 @@ namespace Xam_test_01.Views
             }
         }
 
-        class LableObavjestOdogvorTemplate : DataTemplate
+        class LableObavjestOdgvorTemplate : DataTemplate
         {
-            public LableObavjestOdogvorTemplate() : base(LoadTemplate)
+            public LableObavjestOdgvorTemplate() : base(LoadTemplate)
             {
 
             }
@@ -213,7 +249,6 @@ namespace Xam_test_01.Views
             private static StackLayout LoadTemplate()
             {
                 var zajednickiElementi = new ZajednickiElementiAplikacije();
-
                 var textLable = new Label
                 {
                     FontSize = 18,

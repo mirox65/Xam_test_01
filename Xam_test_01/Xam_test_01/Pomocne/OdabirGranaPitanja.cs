@@ -21,8 +21,8 @@ namespace Xam_test_01.Pomocne
             var countTotalEntries = DataBaseService.SelectCount(tema, level).Result;
             var countCorrectAnswers = DataBaseService.SelectCorrectCount(tema, level).Result;
 
-           var levelToUse =  LevelUp(level, countTotalEntries, countCorrectAnswers);
-            
+            var levelToUse = LevelUp(level, countTotalEntries, countCorrectAnswers);
+
             switch (tema)
             {
                 case "Kinematika":
@@ -38,18 +38,17 @@ namespace Xam_test_01.Pomocne
                     break;
             }
         }
-
         private int LevelUp(int level, int totalEntries, int correctAnswers)
         {
-            if (totalEntries > 10 && (correctAnswers/totalEntries) > 0.6)
+            if (totalEntries > 10 && (correctAnswers / totalEntries) > 0.6)
             {
                 level = 2;
             }
-            else if (totalEntries > 20 && (correctAnswers/totalEntries) > 0.6)
+            else if (totalEntries > 20 && (correctAnswers / totalEntries) > 0.6)
             {
                 level = 3;
             }
-            else 
+            else
             {
                 level = 1;
             }

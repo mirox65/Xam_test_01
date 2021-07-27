@@ -49,10 +49,11 @@ namespace Xam_test_01.ViewModel
                 IsEnabledProvjeriOdgovor = true;
             });
 
-            ProvjeriOdgovorCommand = new Command( async () =>
+            ProvjeriOdgovorCommand = new Command(async () =>
             {
-                int rezultat;
                 ConvertToDouble();
+                int rezultat;
+
                 if (MinVrijednostRješnja <= OdgovorKorisnikaDouble && OdgovorKorisnikaDouble <= MaxVrijednostRješenja)
                 {
                     var obavjest = new Pitanje
@@ -122,6 +123,30 @@ namespace Xam_test_01.ViewModel
             }
         }
 
+        string labelOdgovor;
+
+        public string LabelOdgovor
+        {
+            get => labelOdgovor;
+            set
+            {
+                labelOdgovor = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LabelOdgovor));
+            }
+        }
+
+        string lablePitanja;
+
+
+        public string LablePitanja
+        {
+            get => lablePitanja;
+            set
+            {
+                lablePitanja = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LablePitanja));
+            }
+        }
 
         private string obavjestNakonOdgovora;
 
