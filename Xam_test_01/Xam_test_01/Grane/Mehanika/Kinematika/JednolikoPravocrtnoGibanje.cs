@@ -29,7 +29,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         private readonly Random random = new Random();
 
-        public void GeneriranjePitanja()
+        public void GeneriranjePitanja(int levelToUse)
         {
             RandomBrojevi();
 
