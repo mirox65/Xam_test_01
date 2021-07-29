@@ -24,14 +24,16 @@ namespace Xam_test_01.Pomocne
 
         // Gumbi
 
-        public Button PrimarniNavigacijskiButton(string naziv) => new Button
+        internal Button PrimarniNavigacijskiButton(string naziv) => new Button
         {
             Text = naziv,
             BackgroundColor = PrimarnaBoja,
             TextColor = Color.Black,
             TextTransform = TextTransform.Uppercase,
             FontSize = 18,
-            CommandParameter = naziv
+            CommandParameter = naziv,
+            Margin = new Thickness(20, 10, 20, 0),
+            HeightRequest = 100
         };
 
         internal Button PrimarniNavigacijskiButton(string naziv, string temaPitanja) => new Button
@@ -41,7 +43,49 @@ namespace Xam_test_01.Pomocne
             TextColor = Color.Black,
             TextTransform = TextTransform.Uppercase,
             FontSize = 18,
-            CommandParameter = temaPitanja
+            CommandParameter = temaPitanja,
+            Margin = new Thickness(20, 10, 20, 0),
+            HeightRequest = 100
+        };
+
+        internal Button BackNavigationButton(string naziv) => new Button
+        {
+            Text = naziv,
+            BackgroundColor = PrimarnaBoja,
+            TextColor = Color.Black,
+            TextTransform = TextTransform.Uppercase,
+            FontSize = 18,
+            Margin = new Thickness(10),
+            HeightRequest = 100
+        };
+
+        internal Button OtherButton(string naziv) => new Button
+        {
+            Text = naziv,
+            BackgroundColor = PrimarnaBoja,
+            TextColor = Color.Black,
+            TextTransform = TextTransform.Uppercase,
+            FontSize = 18,
+            CommandParameter = naziv
+        };
+
+        internal Button OtherButton(string naziv, string commandProperty) => new Button
+        {
+            Text = naziv,
+            BackgroundColor = PrimarnaBoja,
+            TextColor = Color.Black,
+            TextTransform = TextTransform.Uppercase,
+            FontSize = 18,
+            CommandParameter = commandProperty
+        };
+
+        internal ImageButton FormulaNavButton(string source) => new ImageButton
+        {
+                Source = source,
+                BackgroundColor = PrimarnaBoja,
+                HeightRequest = 100,
+                Padding = 20,
+                Margin = new Thickness(20, 10, 20, 0)
         };
     }
 }

@@ -25,26 +25,15 @@ namespace Xam_test_01.Views
             var temaDinamikaButton = zajednickiElementi.PrimarniNavigacijskiButton(dinamika);
             temaDinamikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeDinamikaCommand));
 
-            var grid = new Grid
+            Content = new StackLayout
             {
-                Margin = new Thickness(10,20),
-
-                ColumnDefinitions =
+                Children =
                 {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                    temaKinematikaButton,
+                    temaDinamikaButton
                 },
-
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = new GridLength(100, GridUnitType.Absolute) },
-                    new RowDefinition { Height = new GridLength(100, GridUnitType.Absolute) }
-                }
+                Margin = new Thickness(0, 10, 0, 0)
             };
-
-            grid.Children.Add(temaKinematikaButton, 0, 0);
-            grid.Children.Add(temaDinamikaButton, 0, 1);
-
-            Content = grid;
         }
     }
 }

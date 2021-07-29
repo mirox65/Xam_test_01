@@ -22,26 +22,16 @@ namespace Xam_test_01.Views
             var korakButton = zajednickiElementi.PrimarniNavigacijskiButton("Korak po korak");
             korakButton.SetBinding(Button.CommandProperty, nameof(TipViewModel.KorakCommand));
 
-            var grid = new Grid
+            Content = new StackLayout
             {
-                Margin = new Thickness(10, 20),
-
-                ColumnDefinitions =
+                Children =
                 {
-                    new ColumnDefinition { Width = new GridLength(1.0, GridUnitType.Star) }
-                },
-
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = new GridLength(100, GridUnitType.Absolute) },
-                    new RowDefinition { Height = new GridLength(100, GridUnitType.Absolute) }
+                    pitanjaButton,
+                    korakButton
                 }
+                ,
+                Margin = new Thickness(0,10,0,0)
             };
-
-            grid.Children.Add(pitanjaButton, 0, 0);
-            grid.Children.Add(korakButton, 0, 1);
-
-            Content = grid;
         }
     }
 }

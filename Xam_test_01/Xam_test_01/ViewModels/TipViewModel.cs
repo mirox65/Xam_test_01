@@ -14,9 +14,9 @@ namespace Xam_test_01.ViewModels
                 await Application.Current.MainPage.Navigation.PushAsync(new TemeView());
             });
 
-            KorakCommand = new Command(() =>
+            KorakCommand = new Command(async() =>
             {
-                //throw new NotImplementedException();
+                await Application.Current.MainPage.Navigation.PushAsync(new KorakView());
             });
         }
 

@@ -139,4 +139,13 @@
   <ItemGroup>
     <BundleResource Include="Resources\Fizika_korak_Logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FormulaBrzina.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FormulaPut.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FormulaVrijeme.PNG" />
+  </ItemGroup>
 </Project>

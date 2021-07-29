@@ -8,10 +8,17 @@ namespace Xam_test_01.ViewModels
 {
     public class PrikazRjesenjaViewModel
     {
-        public PrikazRjesenjaViewModel(ArrayList odgovorArray)
+        public PrikazRjesenjaViewModel(ArrayList odgovorArray, string imageSource)
         {
 
             OdgovorCollection = new ObservableCollection<Pitanje>();
+            FormulaCollection = new ObservableCollection<Pitanje>();
+
+            var formulaImage = new Pitanje
+            {
+                FormulaImageSource = imageSource
+            };
+            FormulaCollection.Add(formulaImage);
 
             foreach (var element in odgovorArray)
             {
@@ -31,6 +38,7 @@ namespace Xam_test_01.ViewModels
         public PrikazRjesenjaViewModel() { }
 
         public ObservableCollection<Pitanje> OdgovorCollection { get; }
+        public ObservableCollection<Pitanje> FormulaCollection { get; }
         public ICommand NazadCommand { get; }
     }
 }

@@ -11,6 +11,7 @@ namespace Xam_test_01.Pomocne
     {
         public string Pitanje { get; internal set; }
         public ArrayList OdgovorArray { get; set; }
+        public string FormulaImageSource { get; set; }
         public double MinVrijednostRješenja { get; set; }
         public double MaxVrijednostRješenja { get; set; }
         public string MjernaJedinicaOdgvora { get; set; }
@@ -30,6 +31,7 @@ namespace Xam_test_01.Pomocne
                     kinematika.GeneriranjePitanja(levelToUse);
                     Pitanje = kinematika.Pitanje;
                     OdgovorArray = kinematika.OdgovorArray;
+                    FormulaImageSource = kinematika.FormulaImageSource;
                     MinVrijednostRješenja = kinematika.MinVrijednostRješenja;
                     MaxVrijednostRješenja = kinematika.MaxVrijednostRješenja;
                     MjernaJedinicaOdgvora = kinematika.MjernaJedinicaOdgovora;
