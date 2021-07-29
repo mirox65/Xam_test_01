@@ -11,6 +11,7 @@ namespace Xam_test_01.Models
         public string PrikaziOdgovorNaPitanje { get; set; }
         public double RješenjeJednadžbe { get; set; }
         public string ObavjestNakonOdgovora { get; set; }
+        public string FormulaImageSource { get; set; }
         public string MjernaJedinicaOdgovora { get; set; }
         public Color BojaPozdaineOdgovora { get; set; }
     }

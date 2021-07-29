@@ -37,6 +37,7 @@ namespace Xam_test_01.Views
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
             Title = $"{ nazivGraneNavigacija } {level}. stupanj {correctAnswers}/{totalAnsswers}";
+            
 
             // Kolekcija koja može biti i samo label jer sadrži vrijednost string pitanja koje se postavlja korsniku
             // Vezan je za ViewModel vrijednost pitanje kolekcija koji sadrži string i koji se vraća u view za prikaz korisniku
@@ -82,20 +83,20 @@ namespace Xam_test_01.Views
             // Vezano je na ViewModel na ICommand GenerirajPitanjeCommand
             // Pošto je to button koji korisiti primarne boje instancira se iz zajedničkih elemenata
             // Sam gumb je preopterečena metoda za izradu novog gumba jer naziv gumba i commandProperty nisu ista vrijednost
-            var generirajPitanjeButton = zajednickiElementi.PrimarniNavigacijskiButton(novoPitanje, nazivGraneNavigacija);
+            var generirajPitanjeButton = zajednickiElementi.OtherButton(novoPitanje, nazivGraneNavigacija);
             generirajPitanjeButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.GenerirajPitanjeCommand));
 
             // Button koji će prikazati korisniku odogovor nakon što je unešeno riješenje i provjereno
             // Pošto je to jedini gumb ovih vrijednosti onda ga ne generiramo iz zajedničkih elelemnata
             // Ali pošto koristi boje aplikacije da bi se održala uniformiranost boju vuče iz zajedničkih elemenata
             // Gumb nije vidljiv dok se ne unese riješenje
-            var prikaziOdgovorButton = zajednickiElementi.PrimarniNavigacijskiButton(prikaziRiješenjeButton, prikaziRješenjeNaziv);
+            var prikaziOdgovorButton = zajednickiElementi.OtherButton(prikaziRiješenjeButton, prikaziRješenjeNaziv);
             prikaziOdgovorButton.BackgroundColor = zajednickiElementi.NavigacijaDrugaBoja;
             prikaziOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.PrikaziOdgovorCommand));
             prikaziOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledRiješenje));
 
             // Gumb koji korsnik uspoređuje svoje rješenje jednadžbe s rješenjem aplikacije
-            var provjeriOdgovorButton = zajednickiElementi.PrimarniNavigacijskiButton("Provjeri rješenje");
+            var provjeriOdgovorButton = zajednickiElementi.OtherButton("Provjeri rješenje");
             provjeriOdgovorButton.BackgroundColor = zajednickiElementi.BackColorGreen;
             provjeriOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.ProvjeriOdgovorCommand));
             provjeriOdgovorButton.SetBinding(Button.IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledProvjeriOdgovor));
@@ -220,7 +221,9 @@ namespace Xam_test_01.Views
             {
                 var textLable = new Label
                 {
-                    FontSize = 18
+                    FontSize = 22,
+                    HorizontalOptions = LayoutOptions.Center,
+                    TextTransform = TextTransform.Uppercase
                 };
                 textLable.SetBinding(Label.TextProperty, nameof(Pitanje.ObavjestNakonOdgovora));
 

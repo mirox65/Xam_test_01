@@ -13,7 +13,6 @@ namespace Xam_test_01.ViewModel
 {
     public class PitanjaViewModel : INotifyPropertyChanged
     {
-        Formula formula = new Formula();
         private readonly OdabirGranaPitanja odabirGranaPitanja = new OdabirGranaPitanja();
 
         public PitanjaViewModel(string naziv, int level)
@@ -81,7 +80,7 @@ namespace Xam_test_01.ViewModel
 
             PrikaziOdgovorCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView(param, odabirGranaPitanja.OdgovorArray));
+                await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView(param, odabirGranaPitanja.OdgovorArray, odabirGranaPitanja.FormulaImageSource));
                 IsEnabledProvjeriOdgovor = false;
             });
         }

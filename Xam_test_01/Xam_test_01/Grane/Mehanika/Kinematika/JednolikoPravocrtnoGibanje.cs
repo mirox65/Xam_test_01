@@ -14,7 +14,6 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public double BrzinaNula { get; set; } = 0;
         public double Vrijeme { get; set; }
         public string StoRacunamo { get; set; }
-        public string FormulaZaIspis { get; set; }
         public string PrvaVarijabla { get; set; }
         public string DrugaVarijabla { get; set; }
         public string TrećaVarijabla { get; set; }
@@ -26,6 +25,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public ArrayList OdgovorArray { get; set; }
         public Dictionary<int, string> RiječnikPitanja { get; set; }
         public MjerneJedinice Mj { get; } = new MjerneJedinice();
+        public string FormulaImageSource { get; internal set; }
 
         private readonly Random random = new Random();
 
@@ -56,11 +56,11 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             MjernaJedinicaOdgovora = Mj.Sekunda;
             GraniceVrijednostiRješenja();
             StoRacunamo = "t=?";
-            FormulaZaIspis = "t=v/a";
+            FormulaImageSource = FormuleImageSource.KinematikaFormulaVrijeme;
             PrvaVarijabla = $"v = { Brzina } { Mj.Sekunda }";
             DrugaVarijabla = $"a = { Akceleracija } { Mj.MetarSekundaNa2 }";
             Odgovor = $"t = { Riješenje } { Mj.Sekunda }";
-            ArrayOdgovor(StoRacunamo, FormulaZaIspis, PrvaVarijabla, DrugaVarijabla, Odgovor);
+            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
         }
 
         private void GraniceVrijednostiRješenja()
@@ -102,11 +102,11 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             MjernaJedinicaOdgovora = Mj.MetarSekunda;
             GraniceVrijednostiRješenja();
             StoRacunamo = "v=?";
-            FormulaZaIspis = "v=a*t";
+            FormulaImageSource = FormuleImageSource.KinematikaFormulaBrzina;
             PrvaVarijabla = $"a = { Akceleracija } { Mj.MetarSekundaNa2 }";
             DrugaVarijabla = $"t = { Vrijeme } {Mj.Sekunda}";
             Odgovor = $"v = { Math.Round(Brzina, 2) } {Mj.MetarSekunda}";
-            ArrayOdgovor(StoRacunamo, FormulaZaIspis, PrvaVarijabla, DrugaVarijabla, Odgovor);
+            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
         }
 
         private void PitanjeBrzine()
@@ -136,11 +136,11 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             MjernaJedinicaOdgovora = Mj.MetarSekundaNa2;
             GraniceVrijednostiRješenja();
             StoRacunamo = "a=?";
-            FormulaZaIspis = "a=v/t";
+            FormulaImageSource = FormuleImageSource.KinematikaFormulaPut;
             PrvaVarijabla = $"v = { Brzina } {Mj.MetarSekunda}";
             DrugaVarijabla = $"t = { Vrijeme } {Mj.Sekunda}";
             Odgovor = $"a = { Math.Round(Akceleracija, 2)} {Mj.MetarSekundaNa2}";
-            ArrayOdgovor(StoRacunamo, FormulaZaIspis, PrvaVarijabla, DrugaVarijabla, Odgovor);
+            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
         }
 
         private void PitanjaAkceleracije()
@@ -169,14 +169,13 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             Akceleracija = random.Next(1, 10);
         }
 
-        private void ArrayOdgovor(string stoRacunamo, string formulaZaIspis, string prvaNep, string drugaNep, string odgovor)
+        private void ArrayOdgovor(string prvaNep, string drugaNep, string stoRacunamo, string odgovor)
         {
             var ar = new ArrayList
-            {
-                stoRacunamo,
-                formulaZaIspis,
+            {                
                 prvaNep,
                 drugaNep,
+                stoRacunamo,
                 odgovor
             };
 
