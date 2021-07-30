@@ -69,14 +69,14 @@ namespace Xam_test_01.Pomocne
             CommandParameter = naziv
         };
 
-        internal Button OtherButton(string naziv, string commandProperty) => new Button
+        internal Button OtherButton(string naziv, string param) => new Button
         {
             Text = naziv,
             BackgroundColor = PrimarnaBoja,
             TextColor = Color.Black,
             TextTransform = TextTransform.Uppercase,
             FontSize = 18,
-            CommandParameter = commandProperty
+            CommandParameter = param
         };
 
         internal ImageButton FormulaNavButton(string source) => new ImageButton
@@ -86,6 +86,16 @@ namespace Xam_test_01.Pomocne
                 HeightRequest = 100,
                 Padding = 20,
                 Margin = new Thickness(20, 10, 20, 0)
+        };
+
+        internal ImageButton FormulaNavButton(string source, string param) => new ImageButton
+        {
+            Source = source,
+            BackgroundColor = PrimarnaBoja,
+            HeightRequest = 100,
+            Padding = 20,
+            Margin = new Thickness(20, 10, 20, 0),
+            CommandParameter = param
         };
     }
 }

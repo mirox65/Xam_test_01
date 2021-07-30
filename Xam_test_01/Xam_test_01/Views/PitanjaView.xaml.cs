@@ -37,7 +37,6 @@ namespace Xam_test_01.Views
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
             Title = $"{ nazivGraneNavigacija } {level}. stupanj {correctAnswers}/{totalAnsswers}";
-            
 
             // Kolekcija koja može biti i samo label jer sadrži vrijednost string pitanja koje se postavlja korsniku
             // Vezan je za ViewModel vrijednost pitanje kolekcija koji sadrži string i koji se vraća u view za prikaz korisniku
@@ -56,7 +55,7 @@ namespace Xam_test_01.Views
                 BackgroundColor = Color.White,
                 Margin = new Thickness(20, 10),
             };
-            unosOdgovora.SetBinding(Entry.TextProperty, "OdgovorKorisnika");
+            unosOdgovora.SetBinding(Entry.TextProperty, nameof(PitanjaViewModel.OdgovorKorisnika));
             unosOdgovora.SetBinding(IsVisibleProperty, nameof(PitanjaViewModel.IsVisible));
 
 
@@ -99,7 +98,7 @@ namespace Xam_test_01.Views
             var provjeriOdgovorButton = zajednickiElementi.OtherButton("Provjeri rješenje");
             provjeriOdgovorButton.BackgroundColor = zajednickiElementi.BackColorGreen;
             provjeriOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.ProvjeriOdgovorCommand));
-            provjeriOdgovorButton.SetBinding(Button.IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledProvjeriOdgovor));
+            provjeriOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledProvjeriOdgovor));
 
 
             // Generiranje mreže koja će držati elemente aplikacije u pregledu za korisnika

@@ -24,7 +24,6 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public string MjernaJedinicaOdgovora { get; set; }
         public ArrayList OdgovorArray { get; set; }
         public Dictionary<int, string> RiječnikPitanja { get; set; }
-        public MjerneJedinice Mj { get; } = new MjerneJedinice();
         public string FormulaImageSource { get; internal set; }
 
         private readonly Random random = new Random();
@@ -51,16 +50,85 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         private void PitanjeVrijeme()
         {
             PitanjaVrijeme();
-            IzracunVremena(Brzina, Akceleracija);
-            Riješenje = Math.Round(Vrijeme, 2);
-            MjernaJedinicaOdgovora = Mj.Sekunda;
+            Riješenje = Math.Round(Formule.TvaFormula(Brzina, Akceleracija));
+            MjernaJedinicaOdgovora = MjerneJedinice.Sekunda;
             GraniceVrijednostiRješenja();
-            StoRacunamo = "t=?";
+            StoRacunamo = $"{ FizikalneVeličine.Vrijeme } = ?";
             FormulaImageSource = FormuleImageSource.KinematikaFormulaVrijeme;
-            PrvaVarijabla = $"v = { Brzina } { Mj.Sekunda }";
-            DrugaVarijabla = $"a = { Akceleracija } { Mj.MetarSekundaNa2 }";
-            Odgovor = $"t = { Riješenje } { Mj.Sekunda }";
+            PrvaVarijabla = $"{FizikalneVeličine.Brzina} = { Brzina } { MjerneJedinice.Metar }";
+            DrugaVarijabla = $"{FizikalneVeličine.Akceleracija} = { Akceleracija } { MjerneJedinice.MetarSekundaNa2 }";
+            Odgovor = $"{FizikalneVeličine.Vrijeme} = { Riješenje } { MjerneJedinice.Sekunda }";
             ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
+        }
+
+        private void PitanjaVrijeme()
+        {
+            RiječnikPitanja = new Dictionary<int, string>
+            {
+                { 1, $"Za koliko vremena je tijelo nešto pri brzini { Brzina } { MjerneJedinice.MetarSekunda } ako je akcleracija iznosila { Akceleracija } { MjerneJedinice.MetarSekundaNa2 }?" },
+                { 2, $"Za koliko vremena je auto nešto pri brzini { Brzina } { MjerneJedinice.MetarSekunda } ako je akcleracija iznosila { Akceleracija } { MjerneJedinice.MetarSekundaNa2 }?" },
+                { 3, $"Za koliko vremena je avion nešto pri brzini { Brzina }  {MjerneJedinice.MetarSekunda}  ako je akcleracija iznosila { Akceleracija } { MjerneJedinice.MetarSekundaNa2 }?" },
+                { 4, $"Za koliko vremena je autobus nešto pri brzini { Brzina }  {MjerneJedinice.MetarSekunda}  ako je akcleracija iznosila { Akceleracija }  { MjerneJedinice.MetarSekundaNa2 } ?" },
+                { 5, $"Za koliko vremena je bicikl nešto pri brzini { Brzina }  { MjerneJedinice.MetarSekunda }  ako je akcleracija iznosila { Akceleracija }  { MjerneJedinice.MetarSekundaNa2 } ?" }
+            };
+
+            OdabirPitanja();
+        }
+
+        private void PitanjeBrzina()
+        {
+            PitanjeBrzine();
+            Riješenje = Math.Round(Formule.VatFormula(Akceleracija, Vrijeme), 2);
+            MjernaJedinicaOdgovora = MjerneJedinice.Sekunda;
+            GraniceVrijednostiRješenja();
+            StoRacunamo = $"{ FizikalneVeličine.Brzina } = ?";
+            FormulaImageSource = FormuleImageSource.KinematikaFormulaBrzina;
+            PrvaVarijabla = $"{ FizikalneVeličine.Akceleracija } = { Akceleracija } { MjerneJedinice.MetarSekundaNa2 }";
+            DrugaVarijabla = $"{ FizikalneVeličine.Vrijeme } = { Vrijeme } {MjerneJedinice.Sekunda}";
+            Odgovor = $"{ FizikalneVeličine.Brzina } = { Riješenje } { MjerneJedinice.MetarSekunda }";
+            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
+        }
+
+        private void PitanjeBrzine()
+        {
+            RiječnikPitanja = new Dictionary<int, string>
+            {
+                { 1, $"Kojom se brzinom tijelo kreče, ako je akceleracija bila { Akceleracija } { MjerneJedinice.MetarSekundaNa2} i tralajala je { Vrijeme } {MjerneJedinice.Sekunda}?" },
+                { 2, $"Kojom se brzinom auto kreče, ako je akceleracija bila { Akceleracija } { MjerneJedinice.MetarSekundaNa2} i tralajala je { Vrijeme } {MjerneJedinice.Sekunda}?" },
+                { 3, $"Kojom se brzinom avion kreče, ako je akceleracija bila { Akceleracija }  {MjerneJedinice.MetarSekundaNa2}  i tralajala je { Vrijeme } {MjerneJedinice.Sekunda}?" },
+                { 4, $"Kojom se brzinom autobus kreče, ako je akceleracija bila { Akceleracija }  {MjerneJedinice.MetarSekundaNa2}  i tralajala je { Vrijeme }  {MjerneJedinice.Sekunda} ?" },
+                { 5, $"Kojom se brzinom bicikl kreče, ako je akceleracija bila { Akceleracija }  {MjerneJedinice.MetarSekundaNa2}  i tralajala je { Vrijeme }  {MjerneJedinice.Sekunda} ?" }
+            };
+
+            OdabirPitanja();
+        }
+
+        private void PitanjeAkceleracija()
+        {
+            PitanjaAkceleracije();
+            Riješenje = Math.Round(Formule.AvtFormula(Brzina, Vrijeme), 2);
+            MjernaJedinicaOdgovora = MjerneJedinice.MetarSekundaNa2;
+            GraniceVrijednostiRješenja();
+            StoRacunamo = $"{ FizikalneVeličine.Brzina } = ?";
+            FormulaImageSource = FormuleImageSource.KinematikaFormulaPut;
+            PrvaVarijabla = $"{ FizikalneVeličine.Brzina } = { Brzina } {MjerneJedinice.MetarSekunda}";
+            DrugaVarijabla = $"{ FizikalneVeličine.Vrijeme } = { Vrijeme } {MjerneJedinice.Sekunda}";
+            Odgovor = $"{ FizikalneVeličine.Akceleracija } = { Riješenje } {MjerneJedinice.MetarSekundaNa2}";
+            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
+        }
+
+        private void PitanjaAkceleracije()
+        {
+            RiječnikPitanja = new Dictionary<int, string>
+            {
+                { 1, $"U vremenskom intervalu { Vrijeme } {MjerneJedinice.Sekunda} tijelu se poveća brzina za { Brzina } {MjerneJedinice.MetarSekunda}. Koliko je akceleracija tijela?" },
+                { 2, $"U vremenskom intervalu { Vrijeme } {MjerneJedinice.Sekunda} vozilu se poveća brzina za { Brzina } {MjerneJedinice.MetarSekunda}. Koliko je akceleracija vozila?" },
+                { 3, $"U vremenskom intervalu { Vrijeme } {MjerneJedinice.Sekunda} avionu se poveća brzina za { Brzina } {MjerneJedinice.MetarSekunda}. Koliko je akceleracija aviona?" },
+                { 4, $"U vremenskom intervalu { Vrijeme } {MjerneJedinice.Sekunda} autobusu se poveća brzina za { Brzina } {MjerneJedinice.MetarSekunda}. Koliko je akceleracija autobusa?" },
+                { 5, $"U vremenskom intervalu { Vrijeme } {MjerneJedinice.Sekunda} bicklu se poveća brzina za { Brzina } {MjerneJedinice.MetarSekunda}. Koliko je akceleracija bicikla?" }
+            };
+
+            OdabirPitanja();
         }
 
         private void GraniceVrijednostiRješenja()
@@ -69,97 +137,10 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             MaxVrijednostRješenja = Math.Round(Riješenje + (0.1 * Riješenje), 2);
         }
 
-        private void PitanjaVrijeme()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"Za koliko vremena je tijelo nešto pri brzini { Brzina } { Mj.MetarSekunda } ako je akcleracija iznosila { Akceleracija } { Mj.MetarSekundaNa2 }?" },
-                { 2, $"Za koliko vremena je auto nešto pri brzini { Brzina } { Mj.MetarSekunda } ako je akcleracija iznosila { Akceleracija } { Mj.MetarSekundaNa2 }?" },
-                { 3, $"Za koliko vremena je avion nešto pri brzini { Brzina }  {Mj.MetarSekunda}  ako je akcleracija iznosila { Akceleracija } { Mj.MetarSekundaNa2 }?" },
-                { 4, $"Za koliko vremena je autobus nešto pri brzini { Brzina }  {Mj.MetarSekunda}  ako je akcleracija iznosila { Akceleracija }  { Mj.MetarSekundaNa2 } ?" },
-                { 5, $"Za koliko vremena je bicikl nešto pri brzini { Brzina }  { Mj.MetarSekunda }  ako je akcleracija iznosila { Akceleracija }  { Mj.MetarSekundaNa2 } ?" }
-            };
-
-            OdabirPitanja();
-        }
-
         private void OdabirPitanja()
         {
             int brojPitanja = random.Next(1, RiječnikPitanja.Count + 1);
             Pitanje = RiječnikPitanja.FirstOrDefault(x => x.Key == brojPitanja).Value;
-        }
-
-        private void IzracunVremena(double brzina, double akceleracija)
-        {
-            Vrijeme = brzina / akceleracija;
-        }
-
-        private void PitanjeBrzina()
-        {
-            PitanjeBrzine();
-            IzracunBrzine(Akceleracija, Vrijeme);
-            Riješenje = Math.Round(Brzina, 2);
-            MjernaJedinicaOdgovora = Mj.MetarSekunda;
-            GraniceVrijednostiRješenja();
-            StoRacunamo = "v=?";
-            FormulaImageSource = FormuleImageSource.KinematikaFormulaBrzina;
-            PrvaVarijabla = $"a = { Akceleracija } { Mj.MetarSekundaNa2 }";
-            DrugaVarijabla = $"t = { Vrijeme } {Mj.Sekunda}";
-            Odgovor = $"v = { Math.Round(Brzina, 2) } {Mj.MetarSekunda}";
-            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
-        }
-
-        private void PitanjeBrzine()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"Kojom se brzinom tijelo kreče, ako je akceleracija bila { Akceleracija } { Mj.MetarSekundaNa2} i tralajala je { Vrijeme } {Mj.Sekunda}?" },
-                { 2, $"Kojom se brzinom auto kreče, ako je akceleracija bila { Akceleracija } { Mj.MetarSekundaNa2} i tralajala je { Vrijeme } {Mj.Sekunda}?" },
-                { 3, $"Kojom se brzinom avion kreče, ako je akceleracija bila { Akceleracija }  {Mj.MetarSekundaNa2}  i tralajala je { Vrijeme } {Mj.Sekunda}?" },
-                { 4, $"Kojom se brzinom autobus kreče, ako je akceleracija bila { Akceleracija }  {Mj.MetarSekundaNa2}  i tralajala je { Vrijeme }  {Mj.Sekunda} ?" },
-                { 5, $"Kojom se brzinom bicikl kreče, ako je akceleracija bila { Akceleracija }  {Mj.MetarSekundaNa2}  i tralajala je { Vrijeme }  {Mj.Sekunda} ?" }
-            };
-
-            OdabirPitanja();
-        }
-
-        private void IzracunBrzine(double akceleracija, double vrijeme)
-        {
-            Brzina = akceleracija * vrijeme;
-        }
-
-        private void PitanjeAkceleracija()
-        {
-            PitanjaAkceleracije();
-            IzracunAkceleracije(Brzina, Vrijeme);
-            Riješenje = Math.Round(Akceleracija, 2);
-            MjernaJedinicaOdgovora = Mj.MetarSekundaNa2;
-            GraniceVrijednostiRješenja();
-            StoRacunamo = "a=?";
-            FormulaImageSource = FormuleImageSource.KinematikaFormulaPut;
-            PrvaVarijabla = $"v = { Brzina } {Mj.MetarSekunda}";
-            DrugaVarijabla = $"t = { Vrijeme } {Mj.Sekunda}";
-            Odgovor = $"a = { Math.Round(Akceleracija, 2)} {Mj.MetarSekundaNa2}";
-            ArrayOdgovor(PrvaVarijabla, DrugaVarijabla, StoRacunamo, Odgovor);
-        }
-
-        private void PitanjaAkceleracije()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"U vremenskom intervalu { Vrijeme } {Mj.Sekunda} tijelu se poveća brzina za { Brzina } {Mj.MetarSekunda}. Koliko je akceleracija tijela?" },
-                { 2, $"U vremenskom intervalu { Vrijeme } {Mj.Sekunda} vozilu se poveća brzina za { Brzina } {Mj.MetarSekunda}. Koliko je akceleracija vozila?" },
-                { 3, $"U vremenskom intervalu { Vrijeme } {Mj.Sekunda} avionu se poveća brzina za { Brzina } {Mj.MetarSekunda}. Koliko je akceleracija aviona?" },
-                { 4, $"U vremenskom intervalu { Vrijeme } {Mj.Sekunda} autobusu se poveća brzina za { Brzina } {Mj.MetarSekunda}. Koliko je akceleracija autobusa?" },
-                { 5, $"U vremenskom intervalu { Vrijeme } {Mj.Sekunda} bicklu se poveća brzina za { Brzina } {Mj.MetarSekunda}. Koliko je akceleracija bicikla?" }
-            };
-
-            OdabirPitanja();
-        }
-
-        private void IzracunAkceleracije(double brzina, double vrijeme)
-        {
-            Akceleracija = brzina / vrijeme;
         }
 
         private void RandomBrojevi()
@@ -181,7 +162,5 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
             OdgovorArray = ar;
         }
-
     }
-
 }

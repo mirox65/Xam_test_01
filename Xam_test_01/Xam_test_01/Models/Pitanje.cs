@@ -14,5 +14,7 @@ namespace Xam_test_01.Models
         public string FormulaImageSource { get; set; }
         public string MjernaJedinicaOdgovora { get; set; }
         public Color BojaPozdaineOdgovora { get; set; }
+        public string PrikaziPitanje { get; set; }
+        public string PrazneVeličine { get; set; }
     }
 }

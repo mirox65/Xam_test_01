@@ -8,9 +8,9 @@ namespace Xam_test_01.ViewModels
     {
         public KorakViewModel()
         {
-            KinematikaCommand = new Command(async () =>
+            KinematikaCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new KorakFormuleView());
+                await Application.Current.MainPage.Navigation.PushAsync(new KorakFormuleView(param));
             });
 
         }

@@ -1,5 +1,6 @@
 ﻿using Xam_test_01.Models;
 using Xam_test_01.Pomocne;
+using Xam_test_01.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,18 +9,22 @@ namespace Xam_test_01.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class KorakFormuleView : ContentPage
     {
-        public KorakFormuleView()
+        public KorakFormuleView(string title)
         {
             var zajednickiElementi = new ZajednickiElementiAplikacije();
-            var slikeFormula = new KorakFormuleModel();
 
-            Title = "Kinematika";
+            BindingContext = new KorakFormuleViewModel();
 
-            var brzinaButton = zajednickiElementi.FormulaNavButton(slikeFormula.KinematikaFormulaBrzina);
+            Title = title;
 
-            var vrijemeButton = zajednickiElementi.FormulaNavButton(slikeFormula.KinematikaFormulaVrijeme);
+            var brzinaButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaBrzina, "Brzina");
+            brzinaButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.BrzinaButtonCommand));
 
-            var putButton = zajednickiElementi.FormulaNavButton(slikeFormula.KinematikaFormulaPut);
+            var vrijemeButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaVrijeme, "Vrijeme");
+            vrijemeButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.VrijemeButtonCommand));
+
+            var putButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaPut, "Put");
+            putButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.PutButtonCommand));
 
             Content = new StackLayout
             {
