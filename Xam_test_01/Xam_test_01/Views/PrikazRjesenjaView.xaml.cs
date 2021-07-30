@@ -15,11 +15,6 @@ namespace Xam_test_01.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PrikazRjesenjaView : ContentPage
     {
-        public PrikazRjesenjaView()
-        {
-            InitializeComponent();
-        }
-
         public PrikazRjesenjaView(string param, ArrayList odgovorArray, string imageSource)
         {
             BindingContext = new PrikazRjesenjaViewModel(odgovorArray, imageSource);
