@@ -17,10 +17,10 @@ namespace Xam_test_01.ViewModel
 
         public PitanjaViewModel(string naziv, int level)
         {
-            PitanjeCollection = new ObservableCollection<Pitanje>();
-            OdgovorCollection = new ObservableCollection<Pitanje>();
-            ObavijestKorisnikuCollection = new ObservableCollection<Pitanje>();
-            MjernaJedinicaOdgovoraCollection = new ObservableCollection<Pitanje>();
+            PitanjeCollection = new ObservableCollection<PitanjeModel>();
+            OdgovorCollection = new ObservableCollection<PitanjeModel>();
+            ObavijestKorisnikuCollection = new ObservableCollection<PitanjeModel>();
+            MjernaJedinicaOdgovoraCollection = new ObservableCollection<PitanjeModel>();
 
             GenerirajPitanjeCommand = new Command<string>(param =>
             {
@@ -31,20 +31,24 @@ namespace Xam_test_01.ViewModel
                 IsVisible = true;
                 OdgovorKorisnika = string.Empty;
                 IsEnabledRiješenje = false;
-                odabirGranaPitanja.GeneriranjePitanja(param);
 
-                var pitanje = new Pitanje
+                GenPitanje = odabirGranaPitanja.GeneriranjePitanja(param);
+
+
+                var pitanje = new PitanjeModel
                 {
-                    PrikaziGeneriranoPitanje = odabirGranaPitanja.Pitanje
+                    Pitanje = GenPitanje.Pitanje
                 };
                 PitanjeCollection.Add(pitanje);
-                var mjernaJedinica = new Pitanje
+
+                var mjernaJedinica = new PitanjeModel
                 {
-                    MjernaJedinicaOdgovora = $"Unesi odgovor u {odabirGranaPitanja.MjernaJedinicaOdgvora}"
+                    MJRješenje = $"Unesi odgovor u {GenPitanje.MJRješenje}"
                 };
-                MinVrijednostRješnja = odabirGranaPitanja.MinVrijednostRješenja;
-                MaxVrijednostRješenja = odabirGranaPitanja.MaxVrijednostRješenja;
                 MjernaJedinicaOdgovoraCollection.Add(mjernaJedinica);
+
+                MinVrijednostRješnja = GenPitanje.MinVrijednostRješenja;
+                MaxVrijednostRješenja = GenPitanje.MaxVrijednostRješenja;
                 IsEnabledProvjeriOdgovor = true;
             });
 
@@ -55,7 +59,7 @@ namespace Xam_test_01.ViewModel
 
                 if (MinVrijednostRješnja <= OdgovorKorisnikaDouble && OdgovorKorisnikaDouble <= MaxVrijednostRješenja)
                 {
-                    var obavjest = new Pitanje
+                    var obavjest = new PitanjeModel
                     {
                         ObavjestNakonOdgovora = "Točno",
                         BojaPozdaineOdgovora = Color.LightGreen
@@ -65,7 +69,7 @@ namespace Xam_test_01.ViewModel
                 }
                 else
                 {
-                    var obavjest = new Pitanje
+                    var obavjest = new PitanjeModel
                     {
                         ObavjestNakonOdgovora = "Netočno",
                         BojaPozdaineOdgovora = Color.LightPink
@@ -75,13 +79,18 @@ namespace Xam_test_01.ViewModel
                 }
                 IsEnabledProvjeriOdgovor = false;
                 IsEnabledRiješenje = true;
-                await DataBaseService.InsertInto(naziv, rezultat, level);
+                await DataBaseService.InsertInto(naziv, rezultat, GenPitanje.Level);
             });
 
             PrikaziOdgovorCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView(param, odabirGranaPitanja.OdgovorArray, odabirGranaPitanja.FormulaImageSource));
+                await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView(param, GenPitanje.OdgovorArray, GenPitanje.FormulaImage));
                 IsEnabledProvjeriOdgovor = false;
+            });
+
+            NapredakCommand = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new NapredakView(naziv));
             });
         }
 
@@ -102,12 +111,12 @@ namespace Xam_test_01.ViewModel
             set { minVrijednostRješenja = value; }
         }
 
-        private double maxVrijesnotRješenja;
+        private double maxVrijednostRješenja;
 
         public double MaxVrijednostRješenja
         {
-            get { return maxVrijesnotRješenja; }
-            set { maxVrijesnotRješenja = value; }
+            get { return maxVrijednostRješenja; }
+            set { maxVrijednostRješenja = value; }
         }
 
         private string odgovorKorisnika;
@@ -119,43 +128,6 @@ namespace Xam_test_01.ViewModel
             {
                 odgovorKorisnika = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(OdgovorKorisnika));
-            }
-        }
-
-        string labelOdgovor;
-
-        public string LabelOdgovor
-        {
-            get => labelOdgovor;
-            set
-            {
-                labelOdgovor = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LabelOdgovor));
-            }
-        }
-
-        string lablePitanja;
-
-
-        public string LablePitanja
-        {
-            get => lablePitanja;
-            set
-            {
-                lablePitanja = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(LablePitanja));
-            }
-        }
-
-        private string obavjestNakonOdgovora;
-
-        public string ObavjestNakonOdgovora
-        {
-            get => obavjestNakonOdgovora;
-            set
-            {
-                obavjestNakonOdgovora = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(ObavjestNakonOdgovora));
             }
         }
 
@@ -202,12 +174,14 @@ namespace Xam_test_01.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ObservableCollection<Pitanje> OdgovorCollection { get; }
-        public ObservableCollection<Pitanje> PitanjeCollection { get; }
-        public ObservableCollection<Pitanje> ObavijestKorisnikuCollection { get; }
-        public ObservableCollection<Pitanje> MjernaJedinicaOdgovoraCollection { get; }
+        public ObservableCollection<PitanjeModel> OdgovorCollection { get; }
+        public ObservableCollection<PitanjeModel> PitanjeCollection { get; }
+        public ObservableCollection<PitanjeModel> ObavijestKorisnikuCollection { get; }
+        public ObservableCollection<PitanjeModel> MjernaJedinicaOdgovoraCollection { get; }
         public ICommand GenerirajPitanjeCommand { get; }
         public ICommand PrikaziOdgovorCommand { get; }
         public ICommand ProvjeriOdgovorCommand { get; }
+        public ICommand NapredakCommand { get; }
+        public PitanjeModel GenPitanje { get; private set; }
     }
 }

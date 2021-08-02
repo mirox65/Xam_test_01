@@ -16,7 +16,7 @@ namespace Xam_test_01
             {
                 BarBackgroundColor = zajednickiElementi.NavigacijaDrugaBoja,
                 BarTextColor = Color.Black,
-                BackgroundColor = zajednickiElementi.GridBackColor
+                BackgroundColor = zajednickiElementi.GridBackColor,
             };
         }
 

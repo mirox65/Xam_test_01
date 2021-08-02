@@ -11,20 +11,20 @@ namespace Xam_test_01.ViewModels
         public PrikazRjesenjaViewModel(ArrayList odgovorArray, string imageSource)
         {
 
-            OdgovorCollection = new ObservableCollection<Pitanje>();
-            FormulaCollection = new ObservableCollection<Pitanje>();
+            OdgovorCollection = new ObservableCollection<PitanjeModel>();
+            FormulaCollection = new ObservableCollection<PitanjeModel>();
 
-            var formulaImage = new Pitanje
+            var formulaImage = new PitanjeModel
             {
-                FormulaImageSource = imageSource
+                FormulaImage = imageSource
             };
             FormulaCollection.Add(formulaImage);
 
             foreach (var element in odgovorArray)
             {
-                var rjesenje = new Pitanje
+                var rjesenje = new PitanjeModel
                 {
-                    PrikaziOdgovorNaPitanje = element.ToString()
+                    Ogovor = element.ToString()
                 };
                 OdgovorCollection.Add(rjesenje);
             }
@@ -37,8 +37,8 @@ namespace Xam_test_01.ViewModels
 
         public PrikazRjesenjaViewModel() { }
 
-        public ObservableCollection<Pitanje> OdgovorCollection { get; }
-        public ObservableCollection<Pitanje> FormulaCollection { get; }
+        public ObservableCollection<PitanjeModel> OdgovorCollection { get; }
+        public ObservableCollection<PitanjeModel> FormulaCollection { get; }
         public ICommand NazadCommand { get; }
     }
 }

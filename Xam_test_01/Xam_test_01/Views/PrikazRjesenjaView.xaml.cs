@@ -72,7 +72,7 @@ namespace Xam_test_01.Views
             private static StackLayout LoadOdgovorTemplate()
             {
                 var textLable = new Label();
-                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziOdgovorNaPitanje));
+                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.Ogovor));
                 textLable.FontSize = 18;
 
                 var frame = new Frame
@@ -103,7 +103,7 @@ namespace Xam_test_01.Views
                 {
                     HeightRequest = 50
                 };
-                formulaImage.SetBinding(Image.SourceProperty, nameof(Pitanje.FormulaImageSource));
+                formulaImage.SetBinding(Image.SourceProperty, nameof(PitanjeModel.FormulaImage));
 
 
                 var frame = new Frame

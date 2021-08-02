@@ -23,6 +23,9 @@
     <EmbeddedResource Update="Views\KorakView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\NapredakView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\PitanjaView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -39,5 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Grane\Mehanika\Dinamika\" />
+    <Folder Include="Formule\" />
   </ItemGroup>
 </Project>

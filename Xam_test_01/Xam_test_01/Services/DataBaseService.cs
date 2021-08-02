@@ -21,13 +21,13 @@ namespace Xam_test_01.Services
 
             db = new SQLiteConnection(databasePath);
 
-            db.CreateTable<BrojacRezultata>();
+            db.CreateTable<BrojacRezultataModel>();
         }
         
         public static async Task InsertInto(string tema, int rezultat, int level)
         {
             await Init();
-            var unos = new BrojacRezultata
+            var unos = new BrojacRezultataModel
             {
                 Tema = tema,
                 Rezultat = rezultat,
@@ -43,7 +43,7 @@ namespace Xam_test_01.Services
 
             int level;
 
-            var query = db.Table<BrojacRezultata>().Where(t => t.Tema.Equals(tema)).OrderByDescending(x => x.Level).FirstOrDefault();
+            var query = db.Table<BrojacRezultataModel>().Where(t => t.Tema.Equals(tema)).OrderByDescending(x => x.Level).FirstOrDefault();
             var result = query;
 
             if (result is null)
@@ -61,7 +61,7 @@ namespace Xam_test_01.Services
         {
             await Init();
 
-            var query = db.Table<BrojacRezultata>().Where(t => t.Tema.Equals(tema) && t.Level.Equals(level)).Count();
+            var query = db.Table<BrojacRezultataModel>().Where(t => t.Tema.Equals(tema) && t.Level.Equals(level)).Count();
             var ukupno = query;
 
             return ukupno;
@@ -71,7 +71,7 @@ namespace Xam_test_01.Services
         {
             await Init();
 
-            var query = db.Table<BrojacRezultata>().Where(t => t.Tema.Equals(tema) && t.Rezultat.Equals(1) && t.Level.Equals(level)).Count();
+            var query = db.Table<BrojacRezultataModel>().Where(t => t.Tema.Equals(tema) && t.Rezultat.Equals(1) && t.Level.Equals(level)).Count();
             var tocniRezultati = query;
 
             return tocniRezultati;

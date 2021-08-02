@@ -17,14 +17,14 @@ namespace Xam_test_01.Views
 
             Title = title;
 
-            var brzinaButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaBrzina, "Brzina");
-            brzinaButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.BrzinaButtonCommand));
+            var brzinaButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.VstFormulaImage, "Vst");
+            brzinaButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
-            var vrijemeButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaVrijeme, "Vrijeme");
-            vrijemeButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.VrijemeButtonCommand));
+            var vrijemeButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.TsvFormulaImage, "Tsv");
+            vrijemeButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
-            var putButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.KinematikaFormulaPut, "Put");
-            putButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.PutButtonCommand));
+            var putButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.SvtFormulaImage, "Svt");
+            putButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
             Content = new StackLayout
             {
