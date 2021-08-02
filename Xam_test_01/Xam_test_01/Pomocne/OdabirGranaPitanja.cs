@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using Xam_test_01.Grane.Mehanika.Kinematika;
+﻿using Xam_test_01.Grane.Mehanika.Kinematika;
+using Xam_test_01.Models;
 using Xam_test_01.Services;
 
 namespace Xam_test_01.Pomocne
 {
     public class OdabirGranaPitanja
     {
-        public string Pitanje { get; internal set; }
-        public ArrayList OdgovorArray { get; set; }
-        public string FormulaImageSource { get; set; }
-        public double MinVrijednostRješenja { get; set; }
-        public double MaxVrijednostRješenja { get; set; }
-        public string MjernaJedinicaOdgvora { get; set; }
-
-        internal void GeneriranjePitanja(string tema)
+        internal PitanjeModel GeneriranjePitanja(string tema)
         {
+            PitanjeModel pitanje = new PitanjeModel();
+
             var level = DataBaseService.SelectLevel(tema).Result;
             var countTotalEntries = DataBaseService.SelectCount(tema, level).Result;
             var countCorrectAnswers = DataBaseService.SelectCorrectCount(tema, level).Result;
@@ -28,27 +20,26 @@ namespace Xam_test_01.Pomocne
             {
                 case "Kinematika":
                     var kinematika = new JednolikoPravocrtnoGibanje();
-                    kinematika.GeneriranjePitanja(levelToUse);
-                    Pitanje = kinematika.Pitanje;
-                    OdgovorArray = kinematika.OdgovorArray;
-                    FormulaImageSource = kinematika.FormulaImageSource;
-                    MinVrijednostRješenja = kinematika.MinVrijednostRješenja;
-                    MaxVrijednostRješenja = kinematika.MaxVrijednostRješenja;
-                    MjernaJedinicaOdgvora = kinematika.MjernaJedinicaOdgovora;
+                    pitanje = kinematika.GeneriranjePitanja(levelToUse);
+                    pitanje.Level = levelToUse;
                     break;
                 default:
                     break;
             }
+            return pitanje;
         }
         private int LevelUp(int level, int totalEntries, int correctAnswers)
         {
-            if (totalEntries > 10 && (correctAnswers / totalEntries) > 0.6)
+            double postotak = (double)correctAnswers / totalEntries;
+            if (level == 1)
             {
-                level = 2;
+                if (totalEntries > 10 && postotak > 0.6)
+                    level = 2;
             }
-            else if (totalEntries > 20 && (correctAnswers / totalEntries) > 0.6)
+            else if (level == 2)
             {
-                level = 3;
+                if (totalEntries > 20 && postotak > 0.6)
+                    level = 3;
             }
             else
             {

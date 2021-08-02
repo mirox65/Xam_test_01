@@ -6,8 +6,8 @@ namespace Xam_test_01.Pomocne
 {
     public static class FormuleImageSource
     {
-        public static string KinematikaFormulaVrijeme { get; set; } = "FormulaVrijeme.PNG";
-        public static string KinematikaFormulaPut { get; set; } = "FormulaPut.PNG";
-        public static string KinematikaFormulaBrzina { get; set; } = "FormulaBrzina.PNG";
+        public static string TsvFormulaImage { get; set; } = "FormulaVrijeme.PNG";
+        public static string SvtFormulaImage { get; set; } = "FormulaPut.PNG";
+        public static string VstFormulaImage { get; set; } = "FormulaBrzina.PNG";
     }
 }

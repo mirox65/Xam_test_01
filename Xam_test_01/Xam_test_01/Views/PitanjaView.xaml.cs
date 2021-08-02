@@ -23,7 +23,6 @@ namespace Xam_test_01.Views
 
         public PitanjaView(string nazivGraneNavigacija)
         {
-
             var level = DataBaseService.SelectLevel(nazivGraneNavigacija).Result;
             var totalAnsswers = DataBaseService.SelectCount(nazivGraneNavigacija, level).Result;
             var correctAnswers = DataBaseService.SelectCorrectCount(nazivGraneNavigacija, level).Result;
@@ -36,7 +35,15 @@ namespace Xam_test_01.Views
 
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
-            Title = $"{ nazivGraneNavigacija } {level}. stupanj {correctAnswers}/{totalAnsswers}";
+            
+            Title = nazivGraneNavigacija;
+
+            var item = new ToolbarItem
+            {
+                Text = "Napredak",
+            };
+            this.ToolbarItems.Add(item);
+            item.SetBinding(ToolbarItem.CommandProperty, nameof(PitanjaViewModel.NapredakCommand));
 
             // Kolekcija koja može biti i samo label jer sadrži vrijednost string pitanja koje se postavlja korsniku
             // Vezan je za ViewModel vrijednost pitanje kolekcija koji sadrži string i koji se vraća u view za prikaz korisniku
@@ -150,6 +157,7 @@ namespace Xam_test_01.Views
 
             Content = grid;
         }
+        
 
         class LableOdgovorTemplate : DataTemplate
         {
@@ -161,7 +169,7 @@ namespace Xam_test_01.Views
             private static StackLayout LoadOdgovorTemplate()
             {
                 var textLable = new Label();
-                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziOdgovorNaPitanje));
+                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.Ogovor));
 
                 var frame = new Frame
                 {
@@ -192,7 +200,7 @@ namespace Xam_test_01.Views
                 {
                     FontSize = 18
                 };
-                pitanjeTextLable.SetBinding(Label.TextProperty, nameof(Pitanje.PrikaziGeneriranoPitanje));
+                pitanjeTextLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.Pitanje));
 
                 var frame = new Frame
                 {
@@ -224,14 +232,14 @@ namespace Xam_test_01.Views
                     HorizontalOptions = LayoutOptions.Center,
                     TextTransform = TextTransform.Uppercase
                 };
-                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.ObavjestNakonOdgovora));
+                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.ObavjestNakonOdgovora));
 
                 var frame = new Frame
                 {
                     VerticalOptions = LayoutOptions.Center,
                     Content = textLable
                 };
-                frame.SetBinding(BackgroundColorProperty, nameof(Pitanje.BojaPozdaineOdgovora));
+                frame.SetBinding(BackgroundColorProperty, nameof(PitanjeModel.BojaPozdaineOdgovora));
 
                 return new StackLayout
                 {
@@ -255,7 +263,7 @@ namespace Xam_test_01.Views
                 {
                     FontSize = 18,
                 };
-                textLable.SetBinding(Label.TextProperty, nameof(Pitanje.MjernaJedinicaOdgovora));
+                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.MJRješenje));
 
                 var frame = new Frame
                 {

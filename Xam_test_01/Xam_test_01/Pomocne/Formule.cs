@@ -44,13 +44,34 @@ namespace Xam_test_01.Pomocne
         }
     }
 
-    public static class Vrijdnosti
+    public class Vrijdnosti
     {
-        public static ArrayList SvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme};
-        public static ArrayList TsvPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Put};
-        public static ArrayList VstPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Put, FizikalneVeličine.Vrijeme};
-        public static ArrayList AvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme};
-        public static ArrayList VatPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Akceleracija, FizikalneVeličine.Vrijeme};
-        public static ArrayList TvaPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Akceleracija};
+        public ArrayList SvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
+        public ArrayList TsvPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Put, MjerneJedinice.Metar, FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda };
+        public ArrayList VstPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Put, MjerneJedinice.Metar, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
+        public ArrayList AvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
+        public ArrayList VatPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda };
+        public ArrayList TvaPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2};
+
+        public ArrayList PrazneVrijednosti(string param)
+        {
+            ArrayList ar = new ArrayList();
+            switch (param)
+            {
+                case ("Svt"):
+                    return SvtPrazneVrijednosti;
+                case ("Tsv"):
+                    return TsvPrazneVrijednosti;
+                case ("Vst"):
+                    return VstPrazneVrijednosti;
+                case ("Avt"):
+                    return AvtPrazneVrijednosti;
+                case ("Vat"):
+                    return VatPrazneVrijednosti;
+                case ("Tva"):
+                    return TvaPrazneVrijednosti;
+            }
+            return ar;
+        }
     }
 }

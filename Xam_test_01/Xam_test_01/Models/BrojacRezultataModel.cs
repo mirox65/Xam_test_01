@@ -2,7 +2,7 @@
 
 namespace Xam_test_01.Models
 {
-    public class BrojacRezultata
+    public class BrojacRezultataModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
