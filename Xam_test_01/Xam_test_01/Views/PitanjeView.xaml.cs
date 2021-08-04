@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace Xam_test_01.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PitanjaView : ContentPage
+    public partial class PitanjeView : ContentPage
     {
         /// <summary>
         /// View koji se bavi generiranjem elementa za provjeru znanja korisnika.
@@ -21,17 +21,13 @@ namespace Xam_test_01.Views
         private readonly string prikaziRiješenjeButton = "Prikaži riješenje";
         private readonly string prikaziRješenjeNaziv = "Rješenje zadatka";
 
-        public PitanjaView(string nazivGraneNavigacija)
+        public PitanjeView(string nazivGraneNavigacija)
         {
-            var level = DataBaseService.SelectLevel(nazivGraneNavigacija).Result;
-            var totalAnsswers = DataBaseService.SelectCount(nazivGraneNavigacija, level).Result;
-            var correctAnswers = DataBaseService.SelectCorrectCount(nazivGraneNavigacija, level).Result;
-
             // Instanciranje klase zajednicki elementi aplikacije koja sadrži unificirani gumb
             var zajednickiElementi = new ZajednickiElementiAplikacije();
 
             // Veza sa view modelom koji je potereban jer view model odrađuje poslovnu logiku aplikacije
-            BindingContext = new PitanjaViewModel(nazivGraneNavigacija, level);
+            BindingContext = new PitanjeViewModel(nazivGraneNavigacija);
 
             // Naziv stranice koji se prikazuje u navigacijskom elenentu stranice.
             // Naziv dolazi vezan za command property guba sa prijašnjeg view-a u ovom slučaju temaView
@@ -43,7 +39,7 @@ namespace Xam_test_01.Views
                 Text = "Napredak",
             };
             this.ToolbarItems.Add(item);
-            item.SetBinding(ToolbarItem.CommandProperty, nameof(PitanjaViewModel.NapredakCommand));
+            item.SetBinding(ToolbarItem.CommandProperty, nameof(PitanjeViewModel.NapredakCommand));
 
             // Kolekcija koja može biti i samo label jer sadrži vrijednost string pitanja koje se postavlja korsniku
             // Vezan je za ViewModel vrijednost pitanje kolekcija koji sadrži string i koji se vraća u view za prikaz korisniku
@@ -51,7 +47,7 @@ namespace Xam_test_01.Views
             {
                 ItemTemplate = new LablePitanjeTemplate()
             };
-            collectionViewPitanje.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.PitanjeCollection));
+            collectionViewPitanje.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjeViewModel.PitanjeCollection));
 
             // Entry polje (bolje poznato kao input korisnik unosi vrijednost riješenja formule koju je napravio na "papiru" 
             // Entry je vezan za property OdgovorKorisnika u ViewModelu koji se ažurira u stvarno vremenu automatski
@@ -61,36 +57,37 @@ namespace Xam_test_01.Views
                 Placeholder = "Unesi odgovor",
                 BackgroundColor = Color.White,
                 Margin = new Thickness(20, 10),
+                Keyboard = Keyboard.Numeric
             };
-            unosOdgovora.SetBinding(Entry.TextProperty, nameof(PitanjaViewModel.OdgovorKorisnika));
-            unosOdgovora.SetBinding(IsVisibleProperty, nameof(PitanjaViewModel.IsVisible));
+            unosOdgovora.SetBinding(Entry.TextProperty, nameof(PitanjeViewModel.OdgovorKorisnika));
+            unosOdgovora.SetBinding(IsVisibleProperty, nameof(PitanjeViewModel.IsVisible));
 
 
             var collectionViewMjernaJedinica = new CollectionView
             {
                 ItemTemplate = new LableMjernaJedinicaTemplate()
             };
-            collectionViewMjernaJedinica.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.MjernaJedinicaOdgovoraCollection));
+            collectionViewMjernaJedinica.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjeViewModel.MjernaJedinicaOdgovoraCollection));
 
             var obavjestNakonOdgovora = new CollectionView
             {
                 ItemTemplate = new LableObavjestOdgvorTemplate()
             };
-            obavjestNakonOdgovora.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.ObavijestKorisnikuCollection));
+            obavjestNakonOdgovora.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjeViewModel.ObavijestKorisnikuCollection));
 
 
             var collectionViewOdgovor = new CollectionView
             {
                 ItemTemplate = new LableOdgovorTemplate()
             };
-            collectionViewOdgovor.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjaViewModel.OdgovorCollection));
+            collectionViewOdgovor.SetBinding(ItemsView.ItemsSourceProperty, nameof(PitanjeViewModel.OdgovorCollection));
 
             // Button za generiranje novog pitanja
             // Vezano je na ViewModel na ICommand GenerirajPitanjeCommand
             // Pošto je to button koji korisiti primarne boje instancira se iz zajedničkih elemenata
             // Sam gumb je preopterečena metoda za izradu novog gumba jer naziv gumba i commandProperty nisu ista vrijednost
             var generirajPitanjeButton = zajednickiElementi.OtherButton(novoPitanje, nazivGraneNavigacija);
-            generirajPitanjeButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.GenerirajPitanjeCommand));
+            generirajPitanjeButton.SetBinding(Button.CommandProperty, nameof(PitanjeViewModel.GenerirajPitanjeCommand));
 
             // Button koji će prikazati korisniku odogovor nakon što je unešeno riješenje i provjereno
             // Pošto je to jedini gumb ovih vrijednosti onda ga ne generiramo iz zajedničkih elelemnata
@@ -98,14 +95,14 @@ namespace Xam_test_01.Views
             // Gumb nije vidljiv dok se ne unese riješenje
             var prikaziOdgovorButton = zajednickiElementi.OtherButton(prikaziRiješenjeButton, prikaziRješenjeNaziv);
             prikaziOdgovorButton.BackgroundColor = zajednickiElementi.NavigacijaDrugaBoja;
-            prikaziOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.PrikaziOdgovorCommand));
-            prikaziOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledRiješenje));
+            prikaziOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjeViewModel.PrikaziOdgovorCommand));
+            prikaziOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjeViewModel.IsEnabledRiješenje));
 
             // Gumb koji korsnik uspoređuje svoje rješenje jednadžbe s rješenjem aplikacije
             var provjeriOdgovorButton = zajednickiElementi.OtherButton("Provjeri rješenje");
             provjeriOdgovorButton.BackgroundColor = zajednickiElementi.BackColorGreen;
-            provjeriOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjaViewModel.ProvjeriOdgovorCommand));
-            provjeriOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjaViewModel.IsEnabledProvjeriOdgovor));
+            provjeriOdgovorButton.SetBinding(Button.CommandProperty, nameof(PitanjeViewModel.ProvjeriOdgovorCommand));
+            provjeriOdgovorButton.SetBinding(IsEnabledProperty, nameof(PitanjeViewModel.IsEnabledProvjeriOdgovor));
 
 
             // Generiranje mreže koja će držati elemente aplikacije u pregledu za korisnika
