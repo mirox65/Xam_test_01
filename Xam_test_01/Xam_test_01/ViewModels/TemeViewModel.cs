@@ -10,12 +10,12 @@ namespace Xam_test_01.ViewModels
         {
             TemeKinematikaCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PitanjaView(param));
+                await Application.Current.MainPage.Navigation.PushAsync(new PitanjeView(param));
             });
 
             TemeDinamikaCommand = new Command<string>(async param =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new PitanjaView(param));
+                await Application.Current.MainPage.Navigation.PushAsync(new PitanjeView(param));
             });
 
         }

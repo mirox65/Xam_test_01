@@ -19,6 +19,10 @@ namespace Xam_test_01.ViewModels
 
             Razina = $"Razina {level} ";
             Ukupno = $"Rezulata {correctAnswers} / {totalAnsswers}";
+            if(totalAnsswers == 0)
+            {
+                postotak = 0;
+            }
             Postotak = $"Postotak: {postotak}%";
 
             NazadCommand = new Command(async () =>

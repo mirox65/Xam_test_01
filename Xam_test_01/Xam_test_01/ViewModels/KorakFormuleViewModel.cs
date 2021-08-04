@@ -30,7 +30,7 @@ namespace Xam_test_01.ViewModels
 
         private async Task<string> DisplayPrompt(string title, string message)
         {
-            var unos = await Application.Current.MainPage.DisplayPromptAsync(title, message);
+            var unos = await Application.Current.MainPage.DisplayPromptAsync(title, message, keyboard: Keyboard.Numeric);
             return unos;
         }
 

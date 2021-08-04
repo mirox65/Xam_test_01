@@ -75,16 +75,16 @@ namespace Xam_test_01.Models
         private PitanjeModel VstSetUp(string vrijednost1, string vrijednost2)
         {
 
-            FizVel1 = FizikalneVeličine.Brzina;
+            FizVel1 = FizikalneVeličine.Put;
             FizVel2 = FizikalneVeličine.Vrijeme;
-            FizVelRjesenje = FizikalneVeličine.Put;
+            FizVelRjesenje = FizikalneVeličine.Brzina;
             Vrijednost1 = ConvertToDouble(vrijednost1);
             Vrijednost2 = ConvertToDouble(vrijednost2);
             VrijednostRješenje = Formule.VstFormula(Vrijednost1, Vrijednost2);
-            MJ1 = MjerneJedinice.MetarSekunda;
+            MJ1 = MjerneJedinice.Metar;
             MJ2 = MjerneJedinice.Sekunda;
             MJRješenje = MjerneJedinice.Metar;
-            FormulaImage = FormuleImageSource.SvtFormulaImage;
+            FormulaImage = FormuleImageSource.VstFormulaImage;
             OdgovorArray = ListaOdgovora();
 
             return VratiModel();

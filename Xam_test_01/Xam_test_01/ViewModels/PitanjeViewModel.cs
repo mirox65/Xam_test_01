@@ -11,11 +11,11 @@ using Xamarin.Forms;
 
 namespace Xam_test_01.ViewModel
 {
-    public class PitanjaViewModel : INotifyPropertyChanged
+    public class PitanjeViewModel : INotifyPropertyChanged
     {
         private readonly OdabirGranaPitanja odabirGranaPitanja = new OdabirGranaPitanja();
 
-        public PitanjaViewModel(string naziv, int level)
+        public PitanjeViewModel(string naziv)
         {
             PitanjeCollection = new ObservableCollection<PitanjeModel>();
             OdgovorCollection = new ObservableCollection<PitanjeModel>();
