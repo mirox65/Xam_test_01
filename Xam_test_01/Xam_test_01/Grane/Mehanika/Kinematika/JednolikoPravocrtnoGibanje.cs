@@ -14,21 +14,11 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public string Pitanje { get; set; }
         public double Akceleracija { get; set; }
         public double Brzina { get; set; }
-        public double BrzinaNula { get; set; } = 0;
         public double Vrijeme { get; set; }
         public double Put { get; set; }
-        public string StoRacunamo { get; set; }
-        public string PrvaVarijabla { get; set; }
-        public string DrugaVarijabla { get; set; }
-        public string TrećaVarijabla { get; set; }
-        public string Odgovor { get; set; }
-        public double Riješenje { get; set; }
         public double MinVrijednostRješenja { get; set; }
         public double MaxVrijednostRješenja { get; set; }
-        public string MjernaJedinicaOdgovora { get; set; }
-        public ArrayList OdgovorArray { get; set; }
         public Dictionary<int, string> RiječnikPitanja { get; set; }
-        public string FormulaImageSource { get; internal set; }
         public PitanjeModel NovoPitanje { get; set; }
 
         private readonly Random random = new Random();

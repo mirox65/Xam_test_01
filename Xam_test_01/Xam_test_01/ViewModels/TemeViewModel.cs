@@ -8,20 +8,12 @@ namespace Xam_test_01.ViewModels
     {
         public TemeViewModel()
         {
-            TemeKinematikaCommand = new Command<string>(async param =>
+            OdabirGraneFizikeCommand = new Command<string>(async param =>
             {
                 await Application.Current.MainPage.Navigation.PushAsync(new PitanjeView(param));
             });
-
-            TemeDinamikaCommand = new Command<string>(async param =>
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new PitanjeView(param));
-            });
-
         }
 
-        public ICommand TemeKinematikaCommand { get; }
-        public ICommand TemeDinamikaCommand { get; }
-
+        public ICommand OdabirGraneFizikeCommand { get; }
     }
 }

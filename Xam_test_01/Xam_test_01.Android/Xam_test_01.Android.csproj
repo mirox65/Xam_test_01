@@ -101,13 +101,13 @@
     <AndroidResource Include="Resources\drawable\Fizika_korak_Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\FormulaBrzina.PNG" />
+    <AndroidResource Include="Resources\drawable\TsvFormula.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\FormulaVrijeme.PNG" />
+    <AndroidResource Include="Resources\drawable\VstFormula.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\FormulaPut.PNG" />
+    <AndroidResource Include="Resources\drawable\SvtFormula.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

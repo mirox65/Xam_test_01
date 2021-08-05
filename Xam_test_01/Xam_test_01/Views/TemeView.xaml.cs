@@ -20,10 +20,10 @@ namespace Xam_test_01.Views
             Title = "Grane fizike";
 
             var temaKinematikaButton = zajednickiElementi.PrimarniNavigacijskiButton(kinematika);
-            temaKinematikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeKinematikaCommand));
+            temaKinematikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.OdabirGraneFizikeCommand));
 
             var temaDinamikaButton = zajednickiElementi.PrimarniNavigacijskiButton(dinamika);
-            temaDinamikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.TemeDinamikaCommand));
+            temaDinamikaButton.SetBinding(Button.CommandProperty, nameof(TemeViewModel.OdabirGraneFizikeCommand));
 
             Content = new StackLayout
             {
