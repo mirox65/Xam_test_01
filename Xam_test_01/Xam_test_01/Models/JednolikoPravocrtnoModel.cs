@@ -83,7 +83,7 @@ namespace Xam_test_01.Models
             VrijednostRješenje = Formule.VstFormula(Vrijednost1, Vrijednost2);
             MJ1 = MjerneJedinice.Metar;
             MJ2 = MjerneJedinice.Sekunda;
-            MJRješenje = MjerneJedinice.Metar;
+            MJRješenje = MjerneJedinice.MetarSekunda;
             FormulaImage = FormuleImageSource.VstFormulaImage;
             OdgovorArray = ListaOdgovora();
 
