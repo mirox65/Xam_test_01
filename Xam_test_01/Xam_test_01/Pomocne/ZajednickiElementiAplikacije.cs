@@ -79,15 +79,6 @@ namespace Xam_test_01.Pomocne
             CommandParameter = param
         };
 
-        internal ImageButton FormulaNavButton(string source) => new ImageButton
-        {
-                Source = source,
-                BackgroundColor = PrimarnaBoja,
-                HeightRequest = 100,
-                Padding = 20,
-                Margin = new Thickness(20, 10, 20, 0)
-        };
-
         internal ImageButton FormulaNavButton(string source, string param) => new ImageButton
         {
             Source = source,
