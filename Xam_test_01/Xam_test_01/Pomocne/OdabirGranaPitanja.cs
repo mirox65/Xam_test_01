@@ -8,7 +8,8 @@ namespace Xam_test_01.Pomocne
     {
         internal PitanjeModel GeneriranjePitanja(string tema)
         {
-            PitanjeModel pitanje = new PitanjeModel();
+            var kinematika = new Kinematika();
+            var pitanje = new PitanjeModel();
 
             var level = DataBaseService.SelectLevel(tema).Result;
             var countTotalEntries = DataBaseService.SelectCount(tema, level).Result;
@@ -19,15 +20,13 @@ namespace Xam_test_01.Pomocne
             switch (tema)
             {
                 case "Kinematika":
-                    var kinematika = new JednolikoPravocrtnoGibanje();
-                    pitanje = kinematika.GeneriranjePitanja(levelToUse);
-                    pitanje.Level = levelToUse;
-                    break;
+                    return kinematika.GeneriranjePitanja(levelToUse);
                 default:
                     break;
             }
             return pitanje;
         }
+
         private int LevelUp(int level, int totalEntries, int correctAnswers)
         {
             double postotak = (double)correctAnswers / totalEntries;
