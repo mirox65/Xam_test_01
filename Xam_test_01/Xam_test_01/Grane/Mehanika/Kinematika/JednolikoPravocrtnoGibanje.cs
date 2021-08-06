@@ -18,6 +18,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public double Put { get; set; }
         public double MinVrijednostRješenja { get; set; }
         public double MaxVrijednostRješenja { get; set; }
+        public int Razina { get; set; }
         public Dictionary<int, string> RiječnikPitanja { get; set; }
         public PitanjeModel NovoPitanje { get; set; }
 
@@ -26,7 +27,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
             RandomBrojevi();
-
+            Razina = levelToUse;
             int tema = random.Next(1, 4);
             switch (tema)
             {
@@ -50,6 +51,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             pitanje.Pitanje = Pitanje;
             pitanje.MinVrijednostRješenja = MinVrijednostRješenja;
             pitanje.MaxVrijednostRješenja = MaxVrijednostRješenja;
+            pitanje.Level = Razina;
             return pitanje;
         }
 
