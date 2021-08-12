@@ -18,7 +18,7 @@ namespace FizikaKpk_UnitTest
         {
             var model = new JednolikoPravocrtnoModel();
 
-            var pitanjeModel = model.OdabirMetode("Tsv", put.ToString(), brzina.ToString());
+            var pitanjeModel = model.OdabirMetode("Tsv", put.ToString(), brzina.ToString(), "m, s");
             var prvaFizVeličina = pitanjeModel.FizVel1;
             var drugaFizVeličina = pitanjeModel.FizVel2;
             var fizVeličinaRješenja = pitanjeModel.FizVelRjesenja;
@@ -49,7 +49,7 @@ namespace FizikaKpk_UnitTest
         {
             var model = new JednolikoPravocrtnoModel();
 
-            var pitanjeModel = model.OdabirMetode("Svt", brzina.ToString(), vrijeme.ToString());
+            var pitanjeModel = model.OdabirMetode("Svt", brzina.ToString(), vrijeme.ToString(), "m, s");
             var fizVel1 = pitanjeModel.FizVel1;
             var fizVel2 = pitanjeModel.FizVel2;
             var fizVelRj = pitanjeModel.FizVelRjesenja;
@@ -80,7 +80,7 @@ namespace FizikaKpk_UnitTest
         {
             var model = new JednolikoPravocrtnoModel();
 
-            var pitanjeModel = model.OdabirMetode("Vst", put.ToString(), vrijeme.ToString());
+            var pitanjeModel = model.OdabirMetode("Vst", put.ToString(), vrijeme.ToString(), "m, s");
             var fizVel1 = pitanjeModel.FizVel1;
             var fizVel2 = pitanjeModel.FizVel2;
             var fizVelRj = pitanjeModel.FizVelRjesenja;

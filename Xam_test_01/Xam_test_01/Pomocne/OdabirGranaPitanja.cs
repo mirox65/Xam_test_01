@@ -40,6 +40,10 @@ namespace Xam_test_01.Pomocne
                 if (totalEntries > 20 && postotak > 0.6)
                     level = 3;
             }
+            else if (level == 3)
+            {
+                return level;
+            }
             else
             {
                 level = 1;
