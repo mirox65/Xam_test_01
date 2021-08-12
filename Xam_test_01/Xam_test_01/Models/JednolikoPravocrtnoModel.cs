@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Xam_test_01.Pomocne;
 
 namespace Xam_test_01.Models
 {
     public class JednolikoPravocrtnoModel
     {
+        private readonly Vrijednosti vrijdnosti = new Vrijednosti();
+
         public string FizVel1 { get; set; }
         public string FizVel2 { get; set; }
         public string FizVelRjesenje { get; set; }
@@ -18,6 +21,7 @@ namespace Xam_test_01.Models
         public string MJRješenje { get; set; }
         public string FormulaImage { get; set; }
         public ArrayList OdgovorArray { get; set; }
+        public Dictionary<string,string> RječnikVrijednosti { get; set; }
 
         public JednolikoPravocrtnoModel() { }
 
@@ -39,23 +43,25 @@ namespace Xam_test_01.Models
             };
         }
 
-        public PitanjeModel OdabirMetode(string param, string vrijednost1, string vrijednost2)
+        public PitanjeModel OdabirMetode(string param, string vrijednost1, string vrijednost2, string mj)
         {
-            var jpm = new PitanjeModel();
+            RječnikVrijednosti = vrijdnosti.FzikalneMjerneJediniceRiječnik(mj);
             switch (param)
             {
                 case ("Svt"):
-                    return SvtSetUp(vrijednost1, vrijednost2);
+                    SvtSetUp(vrijednost1, vrijednost2);
+                    break;
                 case ("Vst"):
-                    return VstSetUp(vrijednost1, vrijednost2);
+                    VstSetUp(vrijednost1, vrijednost2);
+                    break;
                 case ("Tsv"):
-                    return TsvSetUp(vrijednost1, vrijednost2);
-                default:
-                    return jpm;
+                    TsvSetUp(vrijednost1, vrijednost2);
+                    break;
             }
+            return VratiModel();
         }
 
-        private PitanjeModel TsvSetUp(string vrijednost1, string vrijednost2)
+        private void TsvSetUp(string vrijednost1, string vrijednost2)
         {
             FizVel1 = FizikalneVeličine.Put;
             FizVel2 = FizikalneVeličine.Brzina;
@@ -63,16 +69,14 @@ namespace Xam_test_01.Models
             Vrijednost1 = ConvertToDouble(vrijednost1);
             Vrijednost2 = ConvertToDouble(vrijednost2);
             VrijednostRješenje = Formule.TsvFormula(Vrijednost1, Vrijednost2);
-            MJ1 = MjerneJedinice.Metar;
-            MJ2 = MjerneJedinice.MetarSekunda;
-            MJRješenje = MjerneJedinice.Sekunda;
+            MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
+            MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
+            MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
             FormulaImage = FormuleImageSource.TsvFormulaImage;
             OdgovorArray = ListaOdgovora();
-
-            return VratiModel();
         }
 
-        private PitanjeModel VstSetUp(string vrijednost1, string vrijednost2)
+        private void VstSetUp(string vrijednost1, string vrijednost2)
         {
 
             FizVel1 = FizikalneVeličine.Put;
@@ -81,16 +85,14 @@ namespace Xam_test_01.Models
             Vrijednost1 = ConvertToDouble(vrijednost1);
             Vrijednost2 = ConvertToDouble(vrijednost2);
             VrijednostRješenje = Formule.VstFormula(Vrijednost1, Vrijednost2);
-            MJ1 = MjerneJedinice.Metar;
-            MJ2 = MjerneJedinice.Sekunda;
-            MJRješenje = MjerneJedinice.MetarSekunda;
+            MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
+            MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
+            MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
             FormulaImage = FormuleImageSource.VstFormulaImage;
             OdgovorArray = ListaOdgovora();
-
-            return VratiModel();
         }
 
-        public PitanjeModel SvtSetUp(string vrijednost1, string vrijednost2)
+        public void SvtSetUp(string vrijednost1, string vrijednost2)
         {
             FizVel1 = FizikalneVeličine.Brzina;
             FizVel2 = FizikalneVeličine.Vrijeme;
@@ -98,13 +100,11 @@ namespace Xam_test_01.Models
             Vrijednost1 = ConvertToDouble(vrijednost1);
             Vrijednost2 = ConvertToDouble(vrijednost2);
             VrijednostRješenje = Formule.SvtFormula(Vrijednost1, Vrijednost2);
-            MJ1 = MjerneJedinice.MetarSekunda;
-            MJ2 = MjerneJedinice.Sekunda;
-            MJRješenje = MjerneJedinice.Metar;
+            MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
+            MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
+            MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
             FormulaImage = FormuleImageSource.SvtFormulaImage;
             OdgovorArray = ListaOdgovora();
-
-            return VratiModel();
         }
 
         public double ConvertToDouble(string unosKorisnika)

@@ -43,6 +43,5 @@
   <ItemGroup>
     <Folder Include="Grane\Mehanika\Dinamika\" />
     <Folder Include="Formule\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 </Project>

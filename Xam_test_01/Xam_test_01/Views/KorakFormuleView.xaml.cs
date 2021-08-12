@@ -17,6 +17,16 @@ namespace Xam_test_01.Views
 
             Title = title;
 
+            var mjerneJedinice = new Button
+            {
+                Text = "Odaberi mjerne jedinici"
+            };
+            mjerneJedinice.Clicked += async (sender, args) =>
+            {
+               mjerneJedinice.CommandParameter =  await DisplayActionSheet("Odaber mjernu jedinicu", "Cancel", null, "m, s", "km, h");
+            };
+            mjerneJedinice.SetBinding(Button.CommandParameterProperty, nameof(KorakFormuleViewModel.MjernaJedinica), BindingMode.OneWayToSource);
+
             var brzinaButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.VstFormulaImage, "Vst");
             brzinaButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
@@ -30,6 +40,7 @@ namespace Xam_test_01.Views
             {
                 Children =
                 {
+                    mjerneJedinice,
                     brzinaButton,
                     vrijemeButton,
                     putButton

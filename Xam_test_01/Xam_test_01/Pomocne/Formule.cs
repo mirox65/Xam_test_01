@@ -44,14 +44,49 @@ namespace Xam_test_01.Pomocne
         }
     }
 
-    public class Vrijdnosti
+    public class Vrijednosti
     {
-        public ArrayList SvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
-        public ArrayList TsvPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Put, MjerneJedinice.Metar, FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda };
-        public ArrayList VstPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Put, MjerneJedinice.Metar, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
-        public ArrayList AvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda};
-        public ArrayList VatPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2, FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda };
-        public ArrayList TvaPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda, FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2};
+        public ArrayList SvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme};
+        public ArrayList TsvPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Put, FizikalneVeličine.Brzina };
+        public ArrayList VstPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Put, FizikalneVeličine.Vrijeme };
+        public ArrayList AvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme };
+        public ArrayList VatPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Akceleracija, FizikalneVeličine.Vrijeme };
+        public ArrayList TvaPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Akceleracija };
+        public Dictionary<string, string> RječnikVrijednosti { get; private set; }
+
+        public Dictionary<string, string> FzikalneMjerneJediniceRiječnik(string param)
+        {
+            switch (param)
+            {
+                case "m, s":
+                    return KinematikaOsnovneJedinice();
+                case "km, h":
+                    return KinematikaKiloJedinice();
+            }
+            return RječnikVrijednosti;
+        }
+
+        private Dictionary<string, string> KinematikaKiloJedinice()
+        {
+            return RječnikVrijednosti = new Dictionary<string, string>
+            {
+                { FizikalneVeličine.Put, MjerneJedinice.Kilometar },
+                { FizikalneVeličine.Vrijeme, MjerneJedinice.Sat },
+                { FizikalneVeličine.Brzina, MjerneJedinice.KilometarSat },
+                { FizikalneVeličine.Akceleracija, MjerneJedinice.KilometarSatNa2 }
+            };
+        }
+
+        private Dictionary<string, string> KinematikaOsnovneJedinice()
+        {
+            return RječnikVrijednosti = new Dictionary<string, string>
+            {
+                { FizikalneVeličine.Put, MjerneJedinice.Metar },
+                { FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda },
+                { FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda },
+                { FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2 }
+            };
+        }
 
         public ArrayList PrazneVrijednosti(string param)
         {
