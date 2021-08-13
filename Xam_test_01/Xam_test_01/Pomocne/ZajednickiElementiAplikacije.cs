@@ -36,6 +36,16 @@ namespace Xam_test_01.Pomocne
             HeightRequest = 100
         };
 
+        internal ImageButton FormulaNavButton(string v1, string v2) => new ImageButton
+        {
+            Source = v1,
+            BackgroundColor = PrimarnaBoja,
+            HeightRequest = 100,
+            Padding = 20,
+            Margin = new Thickness(20, 10, 20, 0),
+            CommandParameter = v2
+        };
+
         internal Button PrimarniNavigacijskiButton(string naziv, string temaPitanja) => new Button
         {
             Text = naziv,
@@ -79,9 +89,9 @@ namespace Xam_test_01.Pomocne
             CommandParameter = param
         };
 
-        internal ImageButton FormulaNavButton(string source, string param) => new ImageButton
+        internal ImageButton FormulaNavButton(string param) => new ImageButton
         {
-            Source = source,
+            Source = BibliotekaSlika.ImageSource(param),
             BackgroundColor = PrimarnaBoja,
             HeightRequest = 100,
             Padding = 20,

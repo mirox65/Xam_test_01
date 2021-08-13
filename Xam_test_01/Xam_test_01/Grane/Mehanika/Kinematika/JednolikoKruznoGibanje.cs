@@ -31,7 +31,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
 
         public IKinematikaTijeloModel Tijelo { get; set; }
-
+        public Dictionary<int, string> RiječnikPitanja { get; set; }
 
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {

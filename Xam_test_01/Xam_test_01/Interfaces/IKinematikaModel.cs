@@ -15,5 +15,8 @@ namespace Xam_test_01.Interfaces
         IKinematikaTijeloModel Tijelo { get; set; }
 
         PitanjeModel GeneriranjePitanja(int levelToUse);
+
+        Dictionary<int, string> RiječnikPitanja { get; set; }
+
     }
 }

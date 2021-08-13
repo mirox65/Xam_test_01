@@ -27,13 +27,13 @@ namespace Xam_test_01.Views
             };
             mjerneJedinice.SetBinding(Button.CommandParameterProperty, nameof(KorakFormuleViewModel.MjernaJedinica), BindingMode.OneWayToSource);
 
-            var brzinaButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.VstFormulaImage, "Vst");
+            var brzinaButton = zajednickiElementi.FormulaNavButton("Vst");
             brzinaButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
-            var vrijemeButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.TsvFormulaImage, "Tsv");
+            var vrijemeButton = zajednickiElementi.FormulaNavButton("Tsv");
             vrijemeButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
-            var putButton = zajednickiElementi.FormulaNavButton(FormuleImageSource.SvtFormulaImage, "Svt");
+            var putButton = zajednickiElementi.FormulaNavButton("Svt");
             putButton.SetBinding(Button.CommandProperty, nameof(KorakFormuleViewModel.KalkulatorButtonCommand));
 
             Content = new StackLayout

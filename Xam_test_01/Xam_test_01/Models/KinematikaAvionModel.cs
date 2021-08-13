@@ -22,6 +22,7 @@ namespace Xam_test_01.Models
         public double VrijemeVrijednost { get; private set; }
 
         public double PutVrijednost { get; private set; }
+        public string Prešlo { get; set; }
 
         public void RandomVrijednosti()
         {
@@ -40,6 +41,7 @@ namespace Xam_test_01.Models
                 Tijelo = "avion",
                 SeKreće = "leti",
                 Prođe = "preleti",
+                Prešlo = "preletio",
                 VeličinaMjerneJedinice = "km, h",
                 AkceleracijaVrijednost = AkceleracijaVrijednost,
                 PutVrijednost = PutVrijednost,

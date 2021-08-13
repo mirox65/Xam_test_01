@@ -11,7 +11,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 {
     public class JednolikoPravocrtnoGibanje : IJednolikoPravocrtnoGibanje
     {
-        private readonly JednolikoPravocrtnoModel jpg = new JednolikoPravocrtnoModel();
+        private readonly JednolikoPravocrtnoPitanjeModel jednolikoPravocrtnoPitanjeModel = new JednolikoPravocrtnoPitanjeModel();
         private readonly KinematikaTijeloModelFactory kinematikaModel = new KinematikaTijeloModelFactory();
         private readonly Vrijednosti vrijednosti = new Vrijednosti();
 
@@ -79,45 +79,27 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         private void PitanjeVst()
         {
             RječnikVst();
-            NovoPitanje = jpg.OdabirMetode("Vst", Tijelo.PutVrijednost.ToString(), Tijelo.VrijemeVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Vst", Tijelo.PutVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
         }
 
         private void PitanjeSvt()
         {
             RječnikSvt();
-            NovoPitanje = jpg.OdabirMetode("Svt", Tijelo.BrzinaVrijednost.ToString(), Tijelo.VrijemeVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Svt", Tijelo.BrzinaVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
         }
 
         private void PitanjeTsv()
         {
             RječnikTsv();
-            NovoPitanje = jpg.OdabirMetode("Tsv", Tijelo.PutVrijednost.ToString(), Tijelo.BrzinaVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Tsv", Tijelo.PutVrijednost, Tijelo.BrzinaVrijednost, Tijelo.VeličinaMjerneJedinice);
         }
-
-        private void PitanjeTva()
-        {
-            RječnikTva();
-            NovoPitanje = jpg.OdabirMetode("Tva", Tijelo.BrzinaVrijednost.ToString(), Tijelo.AkceleracijaVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
-        }
-
-        private void PitanjeVat()
-        {
-            RječnikVat();
-            NovoPitanje = jpg.OdabirMetode("Vat", Tijelo.AkceleracijaVrijednost.ToString(), Tijelo.VrijemeVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
-        }
-
-        private void PitanjeAvt()
-        {
-            RječnikAvt();
-            NovoPitanje = jpg.OdabirMetode("Avt", Tijelo.BrzinaVrijednost.ToString(), Tijelo.VrijemeVrijednost.ToString(), Tijelo.VeličinaMjerneJedinice);
-        }
-
 
         private void RječnikVst()
         {
             RiječnikPitanja = new Dictionary<int, string> 
             {
-                { 1, $"Kojom brzinom {Tijelo.SeKreće} {Tijelo.Tijelo} ako put od {Tijelo.PutVrijednost} {RječnikVrijednosti.FirstOrDefault(x => x.Key == Put).Value} {Tijelo.Prođe} za {Tijelo.VrijemeVrijednost} {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}?" },
+                { 1, $"Kojom brzinom {Tijelo.SeKreće} {Tijelo.Tijelo} ako put od {Tijelo.PutVrijednost} {RječnikVrijednosti.FirstOrDefault(x => x.Key == Put).Value} {Tijelo.Prođe} " +
+                $"za {Tijelo.VrijemeVrijednost} {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}?" },
             };
             OdabirPitanja();
         }
@@ -126,7 +108,8 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                {1,$"{ Tijelo.Tijelo } {Tijelo.SeKreće} brzinom {Tijelo.BrzinaVrijednost} {RječnikVrijednosti.First(x => x.Key == Brzina).Value} u vremenskom intervalu {Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}. Prijeđeni put je?" },
+                {1,$"{ Tijelo.Tijelo } {Tijelo.SeKreće} brzinom {Tijelo.BrzinaVrijednost} {RječnikVrijednosti.First(x => x.Key == Brzina).Value} " +
+                $"u vremenskom intervalu {Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}. Prijeđeni put je?" },
             };
             OdabirPitanja();
         }
@@ -135,35 +118,8 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"Za koliko vremena je {Tijelo.Tijelo} prešlo pri brzini { Tijelo.BrzinaVrijednost } { RječnikVrijednosti.First(x => x.Key == Brzina).Value } ako je put duljinje { Tijelo.PutVrijednost } {RječnikVrijednosti.First(x => x.Key == Put).Value}?" },
-            };
-            OdabirPitanja();
-        }
-
-        private void RječnikTva()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"Za koliko vremena je tijelo nešto pri brzini { Tijelo.BrzinaVrijednost } { RječnikVrijednosti.First(x => x.Key == Brzina).Value } ako je akcleracija iznosila { Tijelo.AkceleracijaVrijednost } { RječnikVrijednosti.First(x => x.Key == Akceleracija).Value }?" },
-            };
-            OdabirPitanja();
-        }
-
-        private void RječnikVat()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"Kojom se brzinom tijelo kreče, ako je akceleracija bila { Tijelo.AkceleracijaVrijednost } { RječnikVrijednosti.First(x => x.Key == Akceleracija).Value} i tralajala je { Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}?" },
-            };
-            OdabirPitanja();
-        }
-
-
-        private void RječnikAvt()
-        {
-            RiječnikPitanja = new Dictionary<int, string>
-            {
-                { 1, $"U vremenskom intervalu { Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value } tijelu se poveća brzina za { Tijelo.BrzinaVrijednost } {RječnikVrijednosti.First(x => x.Key == Brzina).Value}. Koliko je akceleracija tijela?" },
+                { 1, $"Za koliko vremena je {Tijelo.Tijelo} {Tijelo.Prešlo} pri brzini { Tijelo.BrzinaVrijednost } { RječnikVrijednosti.First(x => x.Key == Brzina).Value } " +
+                $"ako je put duljinje { Tijelo.PutVrijednost } {RječnikVrijednosti.First(x => x.Key == Put).Value}?" },
             };
             OdabirPitanja();
         }

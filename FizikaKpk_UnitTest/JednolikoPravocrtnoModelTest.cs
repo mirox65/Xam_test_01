@@ -16,9 +16,9 @@ namespace FizikaKpk_UnitTest
         [TestMethod]
         public void TsvSetUp_VrijednostiModela_PovratModel()
         {
-            var model = new JednolikoPravocrtnoModel();
+            var model = new JednolikoPravocrtnoPitanjeModel();
 
-            var pitanjeModel = model.OdabirMetode("Tsv", put.ToString(), brzina.ToString(), "m, s");
+            var pitanjeModel = model.OdabirMetode("Tsv", put, brzina, "m, s");
             var prvaFizVeličina = pitanjeModel.FizVel1;
             var drugaFizVeličina = pitanjeModel.FizVel2;
             var fizVeličinaRješenja = pitanjeModel.FizVelRjesenja;
@@ -47,9 +47,9 @@ namespace FizikaKpk_UnitTest
         [TestMethod]
         public void SvtSetUp_VrijednostModela_PovratModel()
         {
-            var model = new JednolikoPravocrtnoModel();
+            var model = new JednolikoPravocrtnoPitanjeModel();
 
-            var pitanjeModel = model.OdabirMetode("Svt", brzina.ToString(), vrijeme.ToString(), "m, s");
+            var pitanjeModel = model.OdabirMetode("Svt", brzina, vrijeme, "m, s");
             var fizVel1 = pitanjeModel.FizVel1;
             var fizVel2 = pitanjeModel.FizVel2;
             var fizVelRj = pitanjeModel.FizVelRjesenja;
@@ -78,9 +78,9 @@ namespace FizikaKpk_UnitTest
         [TestMethod]
         public void VstSetUp_VrijednostiModela_PovratModel()
         {
-            var model = new JednolikoPravocrtnoModel();
+            var model = new JednolikoPravocrtnoPitanjeModel();
 
-            var pitanjeModel = model.OdabirMetode("Vst", put.ToString(), vrijeme.ToString(), "m, s");
+            var pitanjeModel = model.OdabirMetode("Vst", put, vrijeme, "m, s");
             var fizVel1 = pitanjeModel.FizVel1;
             var fizVel2 = pitanjeModel.FizVel2;
             var fizVelRj = pitanjeModel.FizVelRjesenja;

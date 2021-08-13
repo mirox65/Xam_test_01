@@ -6,9 +6,10 @@ using Xam_test_01.Pomocne;
 
 namespace Xam_test_01.Models
 {
-    public class JednolikoPravocrtnoModel
+    public class JednolikoPravocrtnoPitanjeModel
     {
         private readonly Vrijednosti vrijdnosti = new Vrijednosti();
+        private readonly ListaOdgovora listaOdgovora = new ListaOdgovora();
 
         public string FizVel1 { get; set; }
         public string FizVel2 { get; set; }
@@ -22,125 +23,84 @@ namespace Xam_test_01.Models
         public string FormulaImage { get; set; }
         public ArrayList OdgovorArray { get; set; }
         public Dictionary<string,string> RječnikVrijednosti { get; set; }
+        public string Formula { get; private set; }
 
-        public JednolikoPravocrtnoModel() { }
+    private PitanjeModel VratiModel() => new PitanjeModel
+    {
+        FizVel1 = FizVel1,
+        FizVel2 = FizVel2,
+        FizVelRjesenja = FizVelRjesenje,
+        Vrijednost1 = Vrijednost1,
+        Vrijednost2 = Vrijednost2,
+        VrijednostRješenja = VrijednostRješenje,
+        MJ1 = MJ1,
+        MJ2 = MJ2,
+        MJRješenje = MJRješenje,
+        FormulaImage = FormulaImage,
+        OdgovorArray = OdgovorArray,
+    };
 
-        private PitanjeModel VratiModel()
-        {
-            return new PitanjeModel
-            {
-                FizVel1 = FizVel1,
-                FizVel2 = FizVel2,
-                FizVelRjesenja = FizVelRjesenje,
-                Vrijednost1 = Vrijednost1,
-                Vrijednost2 = Vrijednost2,
-                VrijednostRješenja = VrijednostRješenje,
-                MJ1 = MJ1,
-                MJ2 = MJ2,
-                MJRješenje = MJRješenje,
-                FormulaImage = FormulaImage,
-                OdgovorArray = OdgovorArray,
-            };
-        }
-
-        public PitanjeModel OdabirMetode(string param, string vrijednost1, string vrijednost2, string mj)
+    public PitanjeModel OdabirMetode(string param, double vrijednost1, double vrijednost2, string mj)
         {
             RječnikVrijednosti = vrijdnosti.FzikalneMjerneJediniceRiječnik(mj);
+            Formula = param;
             switch (param)
             {
                 case ("Svt"):
-                    SvtSetUp(vrijednost1, vrijednost2);
+                    SvtSetUp(param, vrijednost1, vrijednost2);
                     break;
                 case ("Vst"):
-                    VstSetUp(vrijednost1, vrijednost2);
+                    VstSetUp(param, vrijednost1, vrijednost2);
                     break;
                 case ("Tsv"):
-                    TsvSetUp(vrijednost1, vrijednost2);
+                    TsvSetUp(param, vrijednost1, vrijednost2);
                     break;
             }
+            OdgovorArray = listaOdgovora.StvoriListuOdgovora(VratiModel());
             return VratiModel();
         }
 
-        private void TsvSetUp(string vrijednost1, string vrijednost2)
+        private void TsvSetUp(string param, double vrijednost1, double vrijednost2)
         {
             FizVel1 = FizikalneVeličine.Put;
             FizVel2 = FizikalneVeličine.Brzina;
             FizVelRjesenje = FizikalneVeličine.Vrijeme;
-            Vrijednost1 = ConvertToDouble(vrijednost1);
-            Vrijednost2 = ConvertToDouble(vrijednost2);
+            Vrijednost1 = vrijednost1;
+            Vrijednost2 = vrijednost2;
             VrijednostRješenje = Formule.TsvFormula(Vrijednost1, Vrijednost2);
             MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
             MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
             MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
-            FormulaImage = FormuleImageSource.TsvFormulaImage;
-            OdgovorArray = ListaOdgovora();
+            FormulaImage = BibliotekaSlika.ImageSource(param);
         }
 
-        private void VstSetUp(string vrijednost1, string vrijednost2)
+        private void VstSetUp(string param, double vrijednost1, double vrijednost2)
         {
 
             FizVel1 = FizikalneVeličine.Put;
             FizVel2 = FizikalneVeličine.Vrijeme;
             FizVelRjesenje = FizikalneVeličine.Brzina;
-            Vrijednost1 = ConvertToDouble(vrijednost1);
-            Vrijednost2 = ConvertToDouble(vrijednost2);
+            Vrijednost1 = vrijednost1;
+            Vrijednost2 = vrijednost2;
             VrijednostRješenje = Formule.VstFormula(Vrijednost1, Vrijednost2);
             MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
             MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
             MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
-            FormulaImage = FormuleImageSource.VstFormulaImage;
-            OdgovorArray = ListaOdgovora();
+            FormulaImage = BibliotekaSlika.ImageSource(param);
         }
 
-        public void SvtSetUp(string vrijednost1, string vrijednost2)
+        public void SvtSetUp(string param, double vrijednost1, double vrijednost2)
         {
             FizVel1 = FizikalneVeličine.Brzina;
             FizVel2 = FizikalneVeličine.Vrijeme;
             FizVelRjesenje = FizikalneVeličine.Put;
-            Vrijednost1 = ConvertToDouble(vrijednost1);
-            Vrijednost2 = ConvertToDouble(vrijednost2);
+            Vrijednost1 = vrijednost1;
+            Vrijednost2 = vrijednost2;
             VrijednostRješenje = Formule.SvtFormula(Vrijednost1, Vrijednost2);
             MJ1 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel1).Value;
             MJ2 = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVel2).Value;
             MJRješenje = RječnikVrijednosti.FirstOrDefault(x => x.Key == FizVelRjesenje).Value;
-            FormulaImage = FormuleImageSource.SvtFormulaImage;
-            OdgovorArray = ListaOdgovora();
-        }
-
-        public double ConvertToDouble(string unosKorisnika)
-        {
-            return Math.Round(Convert.ToDouble(unosKorisnika), 2);
-        }
-
-        private ArrayList ListaOdgovora()
-        {
-            return new ArrayList
-            {
-                PrvaVrijednost(),
-                DrugaVrijednost(),
-                StoRacunamo(),
-                Odgovor()
-            };
-        }
-
-        private string Odgovor()
-        {
-            return $"{ FizVelRjesenje } = { VrijednostRješenje } { MJRješenje }";
-        }
-
-        private string StoRacunamo()
-        {
-            return $"{ FizVelRjesenje } = ?";
-        }
-
-        private string PrvaVrijednost()
-        {
-            return $"{ FizVel1 } = { Vrijednost1 } { MJ1 }";
-        }
-
-        private string DrugaVrijednost()
-        {
-            return $"{ FizVel2 } = { Vrijednost2 } { MJ2 }";
+            FormulaImage = BibliotekaSlika.ImageSource(param);
         }
     }
 }
