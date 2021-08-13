@@ -16,6 +16,5 @@ namespace Xam_test_01.ViewModels
         }
 
         public ICommand KinematikaCommand { get; }
-        public ICommand DinamikaCommand { get; }
     }
 }

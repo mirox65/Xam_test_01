@@ -25,6 +25,7 @@ namespace Xam_test_01.Models
         public double VrijemeVrijednost { get; private set; }
 
         public double PutVrijednost { get; private set; }
+        public string Prešlo { get; set; }
 
         public IKinematikaTijeloModel StvoriFizikalniModel()
         {
@@ -34,6 +35,7 @@ namespace Xam_test_01.Models
                 Tijelo = "bicikl",
                 SeKreće = "se giba",
                 Prođe = "pređe",
+                Prešlo = "prešao",
                 VeličinaMjerneJedinice = "km, h",
                 AkceleracijaVrijednost = AkceleracijaVrijednost,
                 BrzinaVrijednost = BrzinaVrijednost,

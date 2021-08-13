@@ -66,31 +66,25 @@ namespace Xam_test_01.Pomocne
             return RječnikVrijednosti;
         }
 
-        private Dictionary<string, string> KinematikaKiloJedinice()
-        {
-            return RječnikVrijednosti = new Dictionary<string, string>
+        private Dictionary<string, string> KinematikaKiloJedinice() => RječnikVrijednosti = new Dictionary<string, string>
             {
                 { FizikalneVeličine.Put, MjerneJedinice.Kilometar },
                 { FizikalneVeličine.Vrijeme, MjerneJedinice.Sat },
                 { FizikalneVeličine.Brzina, MjerneJedinice.KilometarSat },
                 { FizikalneVeličine.Akceleracija, MjerneJedinice.KilometarSatNa2 }
             };
-        }
 
-        private Dictionary<string, string> KinematikaOsnovneJedinice()
-        {
-            return RječnikVrijednosti = new Dictionary<string, string>
+        private Dictionary<string, string> KinematikaOsnovneJedinice() => RječnikVrijednosti = new Dictionary<string, string>
             {
                 { FizikalneVeličine.Put, MjerneJedinice.Metar },
                 { FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda },
                 { FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda },
                 { FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2 }
             };
-        }
 
         public ArrayList PrazneVrijednosti(string param)
         {
-            ArrayList ar = new ArrayList();
+            var ar = new ArrayList();
             switch (param)
             {
                 case ("Svt"):

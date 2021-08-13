@@ -5,6 +5,7 @@
         string Tijelo { get; }
         string SeKreće { get; }
         string Prođe { get; }
+        string Prešlo { get; set; }
         string VeličinaMjerneJedinice { get; }
         double AkceleracijaVrijednost { get; }
         double BrzinaVrijednost { get; }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ using Xamarin.Forms;
 
 namespace Xam_test_01.ViewModels
 {
-    public class KorakFormuleViewModel :INotifyPropertyChanged
+    public class KorakFormuleViewModel : INotifyPropertyChanged
     {
         private readonly Vrijednosti vrijednosti = new Vrijednosti();
 
@@ -27,10 +28,10 @@ namespace Xam_test_01.ViewModels
 
                     var mjerna = vrijednosti.FzikalneMjerneJediniceRiječnik(mj);
 
-                    var vrijednost1 = await DisplayPrompt(DisplayNaslov($"{lista[0]}"), DisplayMessage($"{ mjerna.First(x => x.Key == (lista[0]).ToString()).Value}"));
-                    var vrijednost2 = await DisplayPrompt(DisplayNaslov($"{lista[1]}"), DisplayMessage($"{ mjerna.First(x => x.Key == (lista[1]).ToString()).Value}"));
+                    var vrijednost1 = Convert.ToDouble(await  DisplayPrompt(DisplayNaslov($"{lista[0]}"), DisplayMessage($"{ mjerna.First(x => x.Key == lista[0].ToString()).Value}")));
+                    var vrijednost2 = Convert.ToDouble(await DisplayPrompt(DisplayNaslov($"{lista[1]}"), DisplayMessage($"{ mjerna.First(x => x.Key == lista[1].ToString()).Value}")));
 
-                    var jednoliko = new JednolikoPravocrtnoModel();
+                    var jednoliko = new JednolikoPravocrtnoPitanjeModel();
                     var lokal = jednoliko.OdabirMetode(param, vrijednost1, vrijednost2, mj);
 
                     await Application.Current.MainPage.Navigation.PushAsync(new PrikazRjesenjaView("Rješenje zadatka", lokal.OdgovorArray, lokal.FormulaImage));
@@ -49,7 +50,7 @@ namespace Xam_test_01.ViewModels
         public string MjernaJedinica
         {
             get => mjernaJedinica;
-            set 
+            set
             { 
                 mjernaJedinica = value;
                 OnPropertyChanged();
