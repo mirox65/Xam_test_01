@@ -10,7 +10,7 @@ namespace Xam_test_01.Pomocne
     {
         public PitanjeModel PitanjeModel { get; set; }
 
-        public ArrayList StvoriListuOdgovora(PitanjeModel pitanje)
+        public ArrayList ListaOdgovoraDvijeVarijable(PitanjeModel pitanje)
         {
             PitanjeModel = pitanje;
             return new ArrayList
@@ -21,6 +21,20 @@ namespace Xam_test_01.Pomocne
                 Odgovor()
             };
         }
+
+        internal ArrayList ListaOdgvoraTriVarijable(PitanjeModel pitanje)
+        {
+            PitanjeModel = pitanje;
+            return new ArrayList
+            {
+                PrvaVrijednost(),
+                DrugaVrijednost(),
+                TrećaVrijednost(),
+                StoRacunamo(),
+                Odgovor()
+            };
+        }
+
 
         private string Odgovor()
         {
@@ -41,5 +55,11 @@ namespace Xam_test_01.Pomocne
         {
             return $"{ PitanjeModel.FizVel2 } = { PitanjeModel.Vrijednost2 } { PitanjeModel.MJ2 }";
         }
+        
+        private string TrećaVrijednost()
+        {
+            return $"{ PitanjeModel.FizVel3 } = { PitanjeModel.Vrijednost3 } { PitanjeModel.MJ3 }";
+        }
+
     }
 }

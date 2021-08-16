@@ -14,6 +14,7 @@ namespace Xam_test_01.Interfaces
         string Kut { get; }
         string VrijemePeriod { get; }
         string Frekvencija { get; }
+        string Vrijeme { get; }
 
     }
 }

@@ -9,5 +9,7 @@ namespace Xam_test_01.Interfaces
     {
         string Put { get; }
         string Vrijeme { get; }
+
+        IPravocrtnoTijeloModel Tijelo { get; set; }
     }
 }

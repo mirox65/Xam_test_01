@@ -10,7 +10,7 @@ namespace Xam_test_01.Pomocne
         public static string Vrijeme { get; private set; } = "t";
         public static string Put { get; private set; } = "s";
         public static string Brzina { get; private set; } = "v";
-        public static string VNulaBrzina { get; private set; } = "v\u8320";
+        public static string VNulaBrzina { get; private set; } = "v\u2080";
         public static string VrijemeNa2 { get; private set; } = "t\u00B2";
         public static string Frekvencija { get; private set; } = "f";
         public static string VrijemePeriod { get; private set; } = "T";

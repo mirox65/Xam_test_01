@@ -8,11 +8,7 @@ namespace Xam_test_01.Interfaces
 {
     public interface IKinematikaModel
     {
-        string Akceleracija { get; }
-
         string Brzina { get; }
-
-        IKinematikaTijeloModel Tijelo { get; set; }
 
         PitanjeModel GeneriranjePitanja(int levelToUse);
 

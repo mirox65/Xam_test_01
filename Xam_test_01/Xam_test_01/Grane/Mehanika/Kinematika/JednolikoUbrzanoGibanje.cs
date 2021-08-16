@@ -12,9 +12,9 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
     public class JednolikoUbrzanoGibanje : IJednolikoUbrzanoGibanje
     {
         private readonly Random random = new Random();
-        private readonly Vrijednosti vrijednosti = new Vrijednosti();
-        private readonly KinematikaTijeloModelFactory kinematikaModel = new KinematikaTijeloModelFactory();
-        private readonly JednolikoPravocrtnoPitanjeModel jednolikoPravocrtnoPitanjeModel = new JednolikoPravocrtnoPitanjeModel();
+        private readonly RječnikFizikalnihVeličinaMjernihJedinica dicVrijednosti = new RječnikFizikalnihVeličinaMjernihJedinica();
+        private readonly UbrzanoTijeloModelFactory ubrzanoTijeloModelFactory = new UbrzanoTijeloModelFactory();
+        private readonly JednolikoUbrzanoPitanjeModel jednolikoUbrzanoPitanjeModel = new JednolikoUbrzanoPitanjeModel();
 
         public string Brzina => FizikalneVeličine.Brzina;
 
@@ -38,87 +38,106 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         public double MaxVrijednostRješenja { get; private set; }
 
-        public IKinematikaTijeloModel Tijelo { get ; set; }
+        public IUbrzanoTijeloModel Tijelo { get ; set; }
 
-        public Dictionary<string, string> RječnikVrijednosti { get; private set; }
+        public Dictionary<string, string> DicVrijednosti { get; private set; }
 
         public Dictionary<int, string> RiječnikPitanja { get; set ; }
 
+
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
-            StvoriModel();
+            StvoriModel(levelToUse);
             StvoriRječnikVrijednosti();
             Razina = levelToUse;
             int tema = random.Next(1, 4);
             switch (tema)
             {
                 case 1:
-                    PitanjeTva();
+                    PitanjeAvv0s();
                     break;
                 case 2:
-                    PitanjeVat();
+                    PitanjeAvv0t();
                     break;
                 case 3:
-                    PitanjeAvt();
+                    PitanjeSv0vt();
+                    break;
+                case 4:
+                    PitanjeSvv0a();
                     break;
             }
             return AppendToNovoPitanje();
         }
 
-        private void PitanjeTva()
+        private void PitanjeSvv0a()
         {
-            RječnikTva();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Tva", Tijelo.BrzinaVrijednost, Tijelo.AkceleracijaVrijednost, Tijelo.VeličinaMjerneJedinice);
+            RječnikSvv0a();
+            NovoPitanje = jednolikoUbrzanoPitanjeModel.OdabirMetode("Svv0a", Tijelo);
         }
 
-        private void PitanjeVat()
+        private void PitanjeAvv0s()
         {
-            RječnikVat();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Vat", Tijelo.AkceleracijaVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
+            RječnikAvv0s();
+            NovoPitanje = jednolikoUbrzanoPitanjeModel.OdabirMetode("Avv0s", Tijelo);
         }
 
-        private void PitanjeAvt()
+        private void PitanjeAvv0t()
         {
-            RječnikAvt();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Avt", Tijelo.BrzinaVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
+            RječnikAvv0t();
+            NovoPitanje = jednolikoUbrzanoPitanjeModel.OdabirMetode("Avv0t", Tijelo);
         }
 
-        private void RječnikTva()
+        private void PitanjeSv0vt()
+        {
+            RječnikSv0vt();
+            NovoPitanje = jednolikoUbrzanoPitanjeModel.OdabirMetode("Sv0vt", Tijelo);
+        }
+
+        private void RječnikAvv0s()
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"Za koliko vremena je tijelo nešto pri brzini { Tijelo.BrzinaVrijednost } { RječnikVrijednosti.First(x => x.Key == Brzina).Value } " +
-                $"ako je akcleracija iznosila { Tijelo.AkceleracijaVrijednost } { RječnikVrijednosti.First(x => x.Key == Akceleracija).Value }?" },
+                { 1, $"Kolika je akceleracija {Tijelo.Tijela} koji jednoliko mijenja brzinu od {Tijelo.VNulaBrzinaVrijednost} {dicVrijednosti.NazivMJ(VNulaBrzna)} na " +
+                $"{Tijelo.BrzinaVrijednost} {dicVrijednosti.NazivMJ(Brzina)} na putu od {Tijelo.PutVrijednost} {dicVrijednosti.NazivMJ(Put)}?" },
             };
             OdabirPitanja();
         }
 
-        private void RječnikVat()
+        private void RječnikSvv0a()
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"Kojom se brzinom tijelo kreče, ako je akceleracija bila { Tijelo.AkceleracijaVrijednost } { RječnikVrijednosti.First(x => x.Key == Akceleracija).Value} " +
-                $"i tralajala je { Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}?" },
+                {1, $"{Tijelo.Tijelo} se počinje gibati jednoliko ubrzano. Na kojoj će udaljenosti njegova brzina iznositi " +
+                $"{Tijelo.BrzinaVrijednost} {dicVrijednosti.NazivMJ(Brzina)}, ako je ubrzanje {Tijelo.AkceleracijaVrijednost} {dicVrijednosti.NazivMJ(Akceleracija)}?" }
+            };
+        }
+
+        private void RječnikAvv0t()
+        {
+            RiječnikPitanja = new Dictionary<int, string>
+            {
+                { 1, $"{Tijelo.VSTijelo} se giba tako da mu se brzina jednoliko promjeni od {Tijelo.VNulaBrzinaVrijednost} {dicVrijednosti.NazivMJ(VNulaBrzna)} " +
+                $"na {Tijelo.BrzinaVrijednost} {dicVrijednosti.NazivMJ(Brzina)} za {Tijelo.VrijemeVrijednost} {dicVrijednosti.NazivMJ(Vrijeme)} " +
+                $"Kolika je akceleracija?" },
             };
             OdabirPitanja();
         }
 
 
-        private void RječnikAvt()
+        private void RječnikSv0vt()
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"U vremenskom intervalu { Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value } " +
-                $"tijelu se poveća brzina za { Tijelo.BrzinaVrijednost } {RječnikVrijednosti.First(x => x.Key == Brzina).Value}. Koliko je akceleracija tijela?" },
+                { 1, $"{Tijelo.VSTijelo} se počne gibati jednoliko ubrzano i za {Tijelo.VrijemeVrijednost} {dicVrijednosti.NazivMJ(Vrijeme)} " +
+                $"postigne brzinu {Tijelo.BrzinaVrijednost} {dicVrijednosti.NazivMJ(Brzina)}. Koliko iznosi put?" },
             };
             OdabirPitanja();
         }
-
 
         private PitanjeModel AppendToNovoPitanje()
         {
             var pitanje = NovoPitanje;
-            GraniceVrijednostiRješenja(5);
+            GraniceVrijednostiRješenja(NovoPitanje.VrijednostRješenja);
             pitanje.Pitanje = Pitanje;
             pitanje.MinVrijednostRješenja = MinVrijednostRješenja;
             pitanje.MaxVrijednostRješenja = MaxVrijednostRješenja;
@@ -134,12 +153,12 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         private void StvoriRječnikVrijednosti()
         {
-            RječnikVrijednosti = vrijednosti.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
+            DicVrijednosti = dicVrijednosti.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
         }
 
-        private void StvoriModel()
+        private void StvoriModel(int levelToUse)
         {
-            Tijelo = kinematikaModel.StvoriKinematikTijeloaModel();
+            Tijelo = ubrzanoTijeloModelFactory.StvoriKinematikTijeloaModel(levelToUse);
         }
 
         private void OdabirPitanja()
@@ -147,6 +166,5 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             int brojPitanja = random.Next(1, RiječnikPitanja.Count + 1);
             Pitanje = RiječnikPitanja.FirstOrDefault(x => x.Key == brojPitanja).Value;
         }
-
     }
 }

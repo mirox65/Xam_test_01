@@ -12,8 +12,8 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
     public class JednolikoPravocrtnoGibanje : IJednolikoPravocrtnoGibanje
     {
         private readonly JednolikoPravocrtnoPitanjeModel jednolikoPravocrtnoPitanjeModel = new JednolikoPravocrtnoPitanjeModel();
-        private readonly KinematikaTijeloModelFactory kinematikaModel = new KinematikaTijeloModelFactory();
-        private readonly Vrijednosti vrijednosti = new Vrijednosti();
+        private readonly PravocrtnoTijeloModelFactory pravocrtnoTijeloModelFactory = new PravocrtnoTijeloModelFactory();
+        private readonly RječnikFizikalnihVeličinaMjernihJedinica dicFizVeličina = new RječnikFizikalnihVeličinaMjernihJedinica();
 
         public string Brzina => FizikalneVeličine.Brzina;
 
@@ -30,13 +30,14 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         public double MaxVrijednostRješenja { get; set; }
         public int Razina { get; set; }
         public Dictionary<int, string> RiječnikPitanja { get; set; }
+        public Dictionary<string, string> DicFizVeličina { get; private set; }
+
         public PitanjeModel NovoPitanje { get; set; }
-        public Dictionary<string, string> RječnikVrijednosti { get; set; }
-        public IKinematikaTijeloModel Tijelo { get; set; }
+        public IPravocrtnoTijeloModel Tijelo { get; set; }
 
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
-            StvoriModel();
+            StvoriModel(levelToUse);
             StvoriRječnikVrijednosti();
             Razina = levelToUse;
             int tema = random.Next(1, 4);
@@ -57,12 +58,12 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         private void StvoriRječnikVrijednosti()
         {
-            RječnikVrijednosti = vrijednosti.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
+            DicFizVeličina = dicFizVeličina.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
         }
 
-        private void StvoriModel()
+        private void StvoriModel(int levelToUse)
         {
-            Tijelo = kinematikaModel.StvoriKinematikTijeloaModel();
+            Tijelo = pravocrtnoTijeloModelFactory.StvoriKinematikTijeloaModel(levelToUse);
         }
 
         private PitanjeModel AppendToNovoPitanje()
@@ -79,27 +80,27 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         private void PitanjeVst()
         {
             RječnikVst();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Vst", Tijelo.PutVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Vst", Tijelo);
         }
 
         private void PitanjeSvt()
         {
             RječnikSvt();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Svt", Tijelo.BrzinaVrijednost, Tijelo.VrijemeVrijednost, Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Svt", Tijelo);
         }
 
         private void PitanjeTsv()
         {
             RječnikTsv();
-            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Tsv", Tijelo.PutVrijednost, Tijelo.BrzinaVrijednost, Tijelo.VeličinaMjerneJedinice);
+            NovoPitanje = jednolikoPravocrtnoPitanjeModel.OdabirMetode("Tsv", Tijelo);
         }
 
         private void RječnikVst()
         {
             RiječnikPitanja = new Dictionary<int, string> 
             {
-                { 1, $"Kojom brzinom {Tijelo.SeKreće} {Tijelo.Tijelo} ako put od {Tijelo.PutVrijednost} {RječnikVrijednosti.FirstOrDefault(x => x.Key == Put).Value} {Tijelo.Prođe} " +
-                $"za {Tijelo.VrijemeVrijednost} {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}?" },
+                { 1, $"Kojom brzinom {Tijelo.SeKreće} {Tijelo.Tijelo} ako put od {Tijelo.PutVrijednost} {dicFizVeličina.NazivMJ(Put)} {Tijelo.Prođe} " +
+                $"za {Tijelo.VrijemeVrijednost} {dicFizVeličina.NazivMJ(Vrijeme)}?" },
             };
             OdabirPitanja();
         }
@@ -108,8 +109,8 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                {1,$"{ Tijelo.Tijelo } {Tijelo.SeKreće} brzinom {Tijelo.BrzinaVrijednost} {RječnikVrijednosti.First(x => x.Key == Brzina).Value} " +
-                $"u vremenskom intervalu {Tijelo.VrijemeVrijednost } {RječnikVrijednosti.First(x => x.Key == Vrijeme).Value}. Prijeđeni put je?" },
+                {1,$"{ Tijelo.VSTijelo } { Tijelo.SeKreće } brzinom { Tijelo.BrzinaVrijednost } { dicFizVeličina.NazivMJ(Brzina) } " +
+                $"u vremenskom intervalu { Tijelo.VrijemeVrijednost } { dicFizVeličina.NazivMJ(Vrijeme) }. Prijeđeni put je?" },
             };
             OdabirPitanja();
         }
@@ -118,8 +119,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"Za koliko vremena je {Tijelo.Tijelo} {Tijelo.Prešlo} pri brzini { Tijelo.BrzinaVrijednost } { RječnikVrijednosti.First(x => x.Key == Brzina).Value } " +
-                $"ako je put duljinje { Tijelo.PutVrijednost } {RječnikVrijednosti.First(x => x.Key == Put).Value}?" },
+                { 1, $"Za koliko vremena je {Tijelo.Tijelo} {Tijelo.Prešlo} put duljine { Tijelo.PutVrijednost } { dicFizVeličina.NazivMJ(Put) } pri brzini { Tijelo.BrzinaVrijednost } { dicFizVeličina.NazivMJ(Brzina) } ?" },
             };
             OdabirPitanja();
         }

@@ -110,13 +110,25 @@
     <AndroidResource Include="Resources\drawable\SvtFormula.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TvaFormula.PNG" />
+    <AndroidResource Include="Resources\drawable\Svv0aFormula.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\VatFormula.PNG" />
+    <AndroidResource Include="Resources\drawable\Avv0sFormula.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AvtFormula.PNG" />
+    <AndroidResource Include="Resources\drawable\Avv0tFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Sv0vtFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\OmegaPiVTFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\VTtnFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\FntFormula.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
