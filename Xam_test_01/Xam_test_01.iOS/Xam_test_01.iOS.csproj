@@ -148,4 +148,34 @@
   <ItemGroup>
     <BundleResource Include="Resources\SvtFormula.PNG" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\VatFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\VTtnFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AvtFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Avv0sFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Avv0tFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\FntFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\OmegaPiVTFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Sv0vt.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Svv0aFormula.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\TvaFormula.PNG" />
+  </ItemGroup>
 </Project>

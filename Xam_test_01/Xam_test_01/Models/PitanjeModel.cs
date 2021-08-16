@@ -26,5 +26,8 @@ namespace Xam_test_01.Models
         public string MJ2 { get; internal set; }
         public string MJRješenje { get; internal set; }
         public int Level { get; internal set; }
+        public string FizVel3 { get; internal set; }
+        public string MJ3 { get; internal set; }
+        public double Vrijednost3 { get; internal set; }
     }
 }

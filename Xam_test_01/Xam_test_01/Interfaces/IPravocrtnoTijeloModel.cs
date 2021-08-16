@@ -1,19 +1,19 @@
 ﻿namespace Xam_test_01.Interfaces
 {
-    public interface IKinematikaTijeloModel
+    public interface IPravocrtnoTijeloModel
     {
         string Tijelo { get; }
+        string VSTijelo { get; }
         string SeKreće { get; }
         string Prođe { get; }
-        string Prešlo { get; set; }
+        string Prešlo { get; }
         string VeličinaMjerneJedinice { get; }
-        double AkceleracijaVrijednost { get; }
         double BrzinaVrijednost { get; }
         double VrijemeVrijednost { get; }
         double PutVrijednost { get; }
 
-        IKinematikaTijeloModel StvoriFizikalniModel();
+        IPravocrtnoTijeloModel StvoriFizikalniModel(int levelToUse);
 
-        void RandomVrijednosti();
+        void RandomVrijednosti(int levelToUse);
     }
 }

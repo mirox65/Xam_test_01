@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Xam_test_01.Pomocne
 {
@@ -23,84 +22,39 @@ namespace Xam_test_01.Pomocne
             return Math.Round(put / vrijeme, 2);
         }
 
-        public static double AvtFormula(double brzina, double vrijeme)
+        public static double Sv0vtFormula(double vrijednost1, double vrijednost2, double vrijednost3)
         {
-            return Math.Round(brzina / vrijeme, 2);
+            return Math.Round(((vrijednost1 + vrijednost2) * vrijednost3) / 2, 2);
         }
 
-        public static double VatFormula(double akceleracija, double vrijeme)
+        internal static double Svv0aFormula(double vrijednost1, double vrijednost2, double vrijednost3)
         {
-            return Math.Round(akceleracija * vrijeme, 2);
+            return Math.Round((Math.Pow(vrijednost1, 2) - Math.Pow(vrijednost2, 2)) / (2 * vrijednost3), 2);
         }
 
-        public static double TvaFormula(double brzina, double akceleracija)
+        internal static double Avv0sFormula(double vrijednost1, double vrijednost2, double vrijednost3)
         {
-            return Math.Round(brzina / akceleracija, 2);
+            return Math.Round((Math.Pow(vrijednost1, 2) - Math.Pow(vrijednost2, 2)) / (2 * vrijednost3), 2);
         }
 
-        internal static object VstFormula(object putVrijednost, double vrijemeVrijednost)
+        internal static double Avv0tFormula(double vrijednost1, double vrijednost2, double vrijednost3)
         {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class Vrijednosti
-    {
-        public ArrayList SvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme};
-        public ArrayList TsvPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Put, FizikalneVeličine.Brzina };
-        public ArrayList VstPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Put, FizikalneVeličine.Vrijeme };
-        public ArrayList AvtPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Vrijeme };
-        public ArrayList VatPrazneVrijednosti { get; set; } = new ArrayList { FizikalneVeličine.Akceleracija, FizikalneVeličine.Vrijeme };
-        public ArrayList TvaPrazneVrijednosti { get; set; } = new ArrayList {FizikalneVeličine.Brzina, FizikalneVeličine.Akceleracija };
-        public Dictionary<string, string> RječnikVrijednosti { get; private set; }
-
-        public Dictionary<string, string> FzikalneMjerneJediniceRiječnik(string param)
-        {
-            switch (param)
-            {
-                case "m, s":
-                    return KinematikaOsnovneJedinice();
-                case "km, h":
-                    return KinematikaKiloJedinice();
-            }
-            return RječnikVrijednosti;
+            return Math.Round((vrijednost1 - vrijednost2) / vrijednost3, 2);
         }
 
-        private Dictionary<string, string> KinematikaKiloJedinice() => RječnikVrijednosti = new Dictionary<string, string>
-            {
-                { FizikalneVeličine.Put, MjerneJedinice.Kilometar },
-                { FizikalneVeličine.Vrijeme, MjerneJedinice.Sat },
-                { FizikalneVeličine.Brzina, MjerneJedinice.KilometarSat },
-                { FizikalneVeličine.Akceleracija, MjerneJedinice.KilometarSatNa2 }
-            };
-
-        private Dictionary<string, string> KinematikaOsnovneJedinice() => RječnikVrijednosti = new Dictionary<string, string>
-            {
-                { FizikalneVeličine.Put, MjerneJedinice.Metar },
-                { FizikalneVeličine.Vrijeme, MjerneJedinice.Sekunda },
-                { FizikalneVeličine.Brzina, MjerneJedinice.MetarSekunda },
-                { FizikalneVeličine.Akceleracija, MjerneJedinice.MetarSekundaNa2 }
-            };
-
-        public ArrayList PrazneVrijednosti(string param)
+        internal static double OmegaPiVTFormula(double pi, double vrijemePeriod)
         {
-            var ar = new ArrayList();
-            switch (param)
-            {
-                case ("Svt"):
-                    return SvtPrazneVrijednosti;
-                case ("Tsv"):
-                    return TsvPrazneVrijednosti;
-                case ("Vst"):
-                    return VstPrazneVrijednosti;
-                case ("Avt"):
-                    return AvtPrazneVrijednosti;
-                case ("Vat"):
-                    return VatPrazneVrijednosti;
-                case ("Tva"):
-                    return TvaPrazneVrijednosti;
-            }
-            return ar;
+            return Math.Round(2*pi / vrijemePeriod, 2);
+        }
+
+        internal static double FntFormula(double brojOkretaja, double vrijeme)
+        {
+            return Math.Round(brojOkretaja / vrijeme, 2);
+        }
+
+        internal static double VTtnFormula(double vrijeme, double brojOkretaja)
+        {
+            return Math.Round(vrijeme / brojOkretaja, 2);
         }
     }
 }

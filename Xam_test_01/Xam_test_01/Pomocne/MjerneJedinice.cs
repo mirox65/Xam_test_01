@@ -12,6 +12,10 @@ namespace Xam_test_01.Pomocne
         public static string Na3 { get; } = "\u00B3";
         public static string MetarSekundaNa2 { get;  } = "m/s\u00B2";
         public static string MetarSekunda { get; } = "m/s";
+        public static string RadSekunda { get; set; } = "rad/s";
+
+
+        public static string Herz { get; set; } = "Hz";
 
         public static string Kilometar { get; set; } = "km";
         public static string Sat { get; set; } = "h";
