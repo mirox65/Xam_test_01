@@ -24,7 +24,7 @@ namespace Xam_test_01.ViewModels
             {
                 var rjesenje = new PitanjeModel
                 {
-                    Ogovor = element.ToString()
+                    Odgovor = element.ToString()
                 };
                 OdgovorCollection.Add(rjesenje);
             }
@@ -35,7 +35,7 @@ namespace Xam_test_01.ViewModels
             });
         }
 
-        public PrikazRjesenjaViewModel() { }
+        //public PrikazRjesenjaViewModel() { }
 
         public ObservableCollection<PitanjeModel> OdgovorCollection { get; }
         public ObservableCollection<PitanjeModel> FormulaCollection { get; }

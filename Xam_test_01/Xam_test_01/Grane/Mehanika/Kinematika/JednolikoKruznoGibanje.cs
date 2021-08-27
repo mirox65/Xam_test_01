@@ -38,21 +38,25 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         public string Vrijeme => FizikalneVeličine.Vrijeme;
 
-
         public IKružnoTijeloModel Tijelo { get; set; }
-        public Dictionary<int, string> RiječnikPitanja { get; set; }
-        public int Razina { get; private set; }
-        public Dictionary<string, string> DicFizVeličina { get; private set; }
-        public PitanjeModel NovoPitanje { get; private set; }
-        public string Pitanje { get; private set; }
-        public double MinVrijednostRješenja { get; private set; }
-        public double MaxVrijednostRješenja { get; private set; }
 
-        
+        public Dictionary<int, string> RiječnikPitanja { get; set; }
+
+        public int Razina { get; private set; }
+
+        public Dictionary<string, string> DicFizVeličina { get; private set; }
+
+        public PitanjeModel NovoPitanje { get; private set; }
+
+        public string Pitanje { get; private set; }
+
+        public double MinVrijednostRješenja { get; private set; }
+
+        public double MaxVrijednostRješenja { get; private set; }
 
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
-            StvoriModel();
+            StvoriTijeloModel();
             StvoriRječnikVrijednosti();
             Razina = levelToUse;
             int tema = random.Next(1, 4);
@@ -71,7 +75,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             return AppendToNovoPitanje();
         }
 
-        private PitanjeModel AppendToNovoPitanje()
+        public PitanjeModel AppendToNovoPitanje()
         {
             var pitanje = NovoPitanje;
             GraniceVrijednostiRješenja(pitanje.VrijednostRješenja);
@@ -81,7 +85,6 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             pitanje.Level = Razina;
             return pitanje;
         }
-
 
         private void PitanjeOmegaPiVT()
         {
@@ -130,23 +133,23 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             OdabirPitanja();
         }
 
-        private void StvoriRječnikVrijednosti()
+        public void StvoriRječnikVrijednosti()
         {
             DicFizVeličina = dicFizVeličina.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
         }
 
-        private void StvoriModel()
+        public void StvoriTijeloModel()
         {
             Tijelo = kružnoTijeloModelFactory.StvoriKinematikTijeloaModel();
         }
 
-        private void OdabirPitanja()
+        public void OdabirPitanja()
         {
             int brojPitanja = random.Next(1, RiječnikPitanja.Count + 1);
             Pitanje = RiječnikPitanja.FirstOrDefault(x => x.Key == brojPitanja).Value;
         }
 
-        private void GraniceVrijednostiRješenja(double vrijednostRješenja)
+        public void GraniceVrijednostiRješenja(double vrijednostRješenja)
         {
             MinVrijednostRješenja = Math.Round(vrijednostRješenja - 0.01, 2);
             MaxVrijednostRješenja = Math.Round(vrijednostRješenja + 0.01, 2);

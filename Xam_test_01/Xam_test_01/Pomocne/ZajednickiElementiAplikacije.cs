@@ -91,7 +91,7 @@ namespace Xam_test_01.Pomocne
 
         internal ImageButton FormulaNavButton(string param) => new ImageButton
         {
-            Source = BibliotekaSlika.ImageSource(param),
+            Source = RječnikSlika.ImageSource(param),
             BackgroundColor = PrimarnaBoja,
             HeightRequest = 100,
             Padding = 20,

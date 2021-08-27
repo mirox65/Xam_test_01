@@ -9,7 +9,7 @@ namespace Xam_test_01.Factory
 {
     public class KinematikaModelFactory
     {
-        readonly List<IKinematikaModel> kinematikaModels = new List<IKinematikaModel>();
+        readonly List<IKinematika> kinematikaModels = new List<IKinematika>();
         public KinematikaModelFactory()
         {
             kinematikaModels.Add(new JednolikoPravocrtnoGibanje());

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Xam_test_01.Interfaces
 {
-    public interface IJednolikoKurznoGibanje : IKinematikaModel
+    public interface IJednolikoKurznoGibanje : IKinematika
     {
         string BrojOkretaja { get; }
         string Polumjer { get; }
@@ -15,6 +15,7 @@ namespace Xam_test_01.Interfaces
         string VrijemePeriod { get; }
         string Frekvencija { get; }
         string Vrijeme { get; }
-
+        IKružnoTijeloModel Tijelo { get; set; }
+        void StvoriTijeloModel();
     }
 }

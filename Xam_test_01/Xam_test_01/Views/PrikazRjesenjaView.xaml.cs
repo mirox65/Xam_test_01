@@ -72,7 +72,7 @@ namespace Xam_test_01.Views
             private static StackLayout LoadOdgovorTemplate()
             {
                 var textLable = new Label();
-                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.Ogovor));
+                textLable.SetBinding(Label.TextProperty, nameof(PitanjeModel.Odgovor));
                 textLable.FontSize = 18;
 
                 var frame = new Frame

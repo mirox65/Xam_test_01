@@ -72,7 +72,7 @@ namespace Xam_test_01.Models
             MJ1 = dicFizVeličina.NazivMJ(FizVel1);
             MJ2 = dicFizVeličina.NazivMJ(FizVel2);
             MJRješenje = dicFizVeličina.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         private void VstSetUp(string param, IPravocrtnoTijeloModel tijelo)
@@ -89,7 +89,7 @@ namespace Xam_test_01.Models
             MJ1 = dicFizVeličina.NazivMJ(FizVel1);
             MJ2 = dicFizVeličina.NazivMJ(FizVel2);
             MJRješenje = dicFizVeličina.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         public void SvtSetUp(string param, IPravocrtnoTijeloModel tijelo)
@@ -105,7 +105,7 @@ namespace Xam_test_01.Models
             MJ1 = dicFizVeličina.NazivMJ(FizVel1);
             MJ2 = dicFizVeličina.NazivMJ(FizVel2);
             MJRješenje = dicFizVeličina.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
     }
 }

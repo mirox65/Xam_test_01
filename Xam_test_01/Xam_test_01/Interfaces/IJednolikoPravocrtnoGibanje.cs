@@ -5,10 +5,11 @@ using Xam_test_01.Models;
 
 namespace Xam_test_01.Interfaces
 {
-    public interface IJednolikoPravocrtnoGibanje : IKinematikaModel
+    public interface IJednolikoPravocrtnoGibanje : IKinematika
     {
         string Put { get; }
         string Vrijeme { get; }
+        void StvoriTijeloModel(int levelToUse);
 
         IPravocrtnoTijeloModel Tijelo { get; set; }
     }

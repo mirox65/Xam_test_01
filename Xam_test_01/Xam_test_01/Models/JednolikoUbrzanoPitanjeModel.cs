@@ -80,7 +80,7 @@ namespace Xam_test_01.Models
             MJ2 = dicVrijednosti.NazivMJ(FizVel2);
             MJ3 = dicVrijednosti.NazivMJ(FizVel3);
             MJRješenje = dicVrijednosti.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         private void Avv0sSetUp(string param, IUbrzanoTijeloModel tijelo)
@@ -108,7 +108,7 @@ namespace Xam_test_01.Models
             MJ2 = dicVrijednosti.NazivMJ(FizVel2);
             MJ3 = dicVrijednosti.NazivMJ(FizVel3);
             MJRješenje = dicVrijednosti.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         private void Avv0tSetUp(string param, IUbrzanoTijeloModel tijelo)
@@ -136,7 +136,7 @@ namespace Xam_test_01.Models
             MJ2 = dicVrijednosti.NazivMJ(FizVel2);
             MJ3 = dicVrijednosti.NazivMJ(FizVel3);
             MJRješenje = dicVrijednosti.NazivMJ(FizVelRjesenje);
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         private void Sv0vtSetUp(string param, IUbrzanoTijeloModel tijelo)
@@ -168,7 +168,7 @@ namespace Xam_test_01.Models
             MJ3 = dicVrijednosti.NazivMJ(FizVel3);
             MJRješenje = dicVrijednosti.NazivMJ(FizVelRjesenje);
 
-            FormulaImage = BibliotekaSlika.ImageSource(param);
+            FormulaImage = RječnikSlika.ImageSource(param);
         }
 
         private PitanjeModel VratiModel() => new PitanjeModel
