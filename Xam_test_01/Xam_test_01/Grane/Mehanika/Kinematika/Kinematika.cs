@@ -33,7 +33,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         private PitanjeModel Level3(int levelToUse)
         {
-            var indexTeme = random.Next(2, 3);
+            var indexTeme = random.Next(0, 3);
             return kinematikaModelFactory.StvoriKinematikaModel(levelToUse, indexTeme);
         }
     }
