@@ -37,7 +37,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
-            StvoriModel(levelToUse);
+            StvoriTijeloModel(levelToUse);
             StvoriRječnikVrijednosti();
             Razina = levelToUse;
             int tema = random.Next(1, 4);
@@ -56,17 +56,17 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             return AppendToNovoPitanje();
         }
 
-        private void StvoriRječnikVrijednosti()
+        public void StvoriRječnikVrijednosti()
         {
             DicFizVeličina = dicFizVeličina.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
         }
 
-        private void StvoriModel(int levelToUse)
+        public void StvoriTijeloModel(int levelToUse)
         {
             Tijelo = pravocrtnoTijeloModelFactory.StvoriKinematikTijeloaModel(levelToUse);
         }
 
-        private PitanjeModel AppendToNovoPitanje()
+        public PitanjeModel AppendToNovoPitanje()
         {
             var pitanje = NovoPitanje;
             GraniceVrijednostiRješenja(pitanje.VrijednostRješenja);
@@ -119,18 +119,18 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
         {
             RiječnikPitanja = new Dictionary<int, string>
             {
-                { 1, $"Za koliko vremena je {Tijelo.Tijelo} {Tijelo.Prešlo} put duljine { Tijelo.PutVrijednost } { dicFizVeličina.NazivMJ(Put) } pri brzini { Tijelo.BrzinaVrijednost } { dicFizVeličina.NazivMJ(Brzina) } ?" },
+                { 1, $"Za koliko vremena je {Tijelo.Tijelo} {Tijelo.Prešlo} put duljine { Tijelo.PutVrijednost } { dicFizVeličina.NazivMJ(Put) } pri brzini { Tijelo.BrzinaVrijednost } { dicFizVeličina.NazivMJ(Brzina) }?" },
             };
             OdabirPitanja();
         }
 
-        private void GraniceVrijednostiRješenja(double vrijednostRješenja)
+        public void GraniceVrijednostiRješenja(double vrijednostRješenja)
         {
             MinVrijednostRješenja = Math.Round(vrijednostRješenja - 0.01, 2);
             MaxVrijednostRješenja = Math.Round(vrijednostRješenja + 0.01, 2);
         }
 
-        private void OdabirPitanja()
+        public void OdabirPitanja()
         {
             int brojPitanja = random.Next(1, RiječnikPitanja.Count + 1);
             Pitanje = RiječnikPitanja.FirstOrDefault(x => x.Key == brojPitanja).Value;

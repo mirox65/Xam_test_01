@@ -40,14 +40,14 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
 
         public IUbrzanoTijeloModel Tijelo { get ; set; }
 
-        public Dictionary<string, string> DicVrijednosti { get; private set; }
+        public Dictionary<string, string> DicFizVeličina { get; private set; }
 
         public Dictionary<int, string> RiječnikPitanja { get; set ; }
 
 
         public PitanjeModel GeneriranjePitanja(int levelToUse)
         {
-            StvoriModel(levelToUse);
+            StvoriTijeloModel(levelToUse);
             StvoriRječnikVrijednosti();
             Razina = levelToUse;
             int tema = random.Next(1, 4);
@@ -123,7 +123,6 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             OdabirPitanja();
         }
 
-
         private void RječnikSv0vt()
         {
             RiječnikPitanja = new Dictionary<int, string>
@@ -134,7 +133,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             OdabirPitanja();
         }
 
-        private PitanjeModel AppendToNovoPitanje()
+        public PitanjeModel AppendToNovoPitanje()
         {
             var pitanje = NovoPitanje;
             GraniceVrijednostiRješenja(NovoPitanje.VrijednostRješenja);
@@ -145,23 +144,23 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             return pitanje;
         }
 
-        private void GraniceVrijednostiRješenja(double vrijednostRješenja)
+        public void GraniceVrijednostiRješenja(double vrijednostRješenja)
         {
             MinVrijednostRješenja = Math.Round(vrijednostRješenja - 0.01, 2);
             MaxVrijednostRješenja = Math.Round(vrijednostRješenja + 0.01, 2);
         }
 
-        private void StvoriRječnikVrijednosti()
+        public void StvoriRječnikVrijednosti()
         {
-            DicVrijednosti = dicVrijednosti.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
+            DicFizVeličina = dicVrijednosti.FzikalneMjerneJediniceRiječnik(Tijelo.VeličinaMjerneJedinice);
         }
 
-        private void StvoriModel(int levelToUse)
+        public void StvoriTijeloModel(int levelToUse)
         {
             Tijelo = ubrzanoTijeloModelFactory.StvoriKinematikTijeloaModel(levelToUse);
         }
 
-        private void OdabirPitanja()
+        public void OdabirPitanja()
         {
             int brojPitanja = random.Next(1, RiječnikPitanja.Count + 1);
             Pitanje = RiječnikPitanja.FirstOrDefault(x => x.Key == brojPitanja).Value;

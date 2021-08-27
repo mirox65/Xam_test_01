@@ -22,6 +22,5 @@ namespace Xam_test_01.Interfaces
         IUbrzanoTijeloModel StvoriFizikalniModel(int levelToUse);
 
         void RandomVrijednosti(int levelToUse);
-
     }
 }

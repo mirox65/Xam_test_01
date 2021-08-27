@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Xam_test_01.Pomocne
 {
-    public static class BibliotekaSlika
+    public static class RječnikSlika
     {
         public static Dictionary<string, string> BibliotekaSlikaFormula { get; set; }
 
-        private static void StvoriBiblioteku()
+        private static void SlikeRječnik()
         {
             BibliotekaSlikaFormula = new Dictionary<string, string>
             {
@@ -28,7 +28,7 @@ namespace Xam_test_01.Pomocne
 
         public static string ImageSource(string param)
         {
-            StvoriBiblioteku();
+            SlikeRječnik();
             return BibliotekaSlikaFormula.First(s => s.Key == param).Value;
         }
     }

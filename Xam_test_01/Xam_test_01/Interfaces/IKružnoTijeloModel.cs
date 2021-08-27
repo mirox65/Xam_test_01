@@ -14,9 +14,7 @@ namespace Xam_test_01.Interfaces
         double FrekvencijaVrijednost { get; }
         double VrijemePeriodVrijednost { get; }
         double VrijemeVrijednost { get; }
-
         IKružnoTijeloModel StvoriFizikalniModel();
-
         void RandomVrijednosti();
     }
 }

@@ -9,10 +9,9 @@ namespace Xam_test_01.Models
     public class PitanjeModel
     {
         public string Pitanje { get; set; }
-        public string Ogovor { get; set; }
+        public string Odgovor { get; set; }
         public string ObavjestNakonOdgovora { get; set; }
         public string FormulaImage { get; set; }
-        public Color BojaPozdaineOdgovora { get; set; }
         public ArrayList OdgovorArray { get; set; }
         public double MinVrijednostRješenja { get; set; }
         public double MaxVrijednostRješenja { get; set; }
@@ -29,5 +28,6 @@ namespace Xam_test_01.Models
         public string FizVel3 { get; internal set; }
         public string MJ3 { get; internal set; }
         public double Vrijednost3 { get; internal set; }
+        public Color BojaPozdaineOdgovora { get; set; }
     }
 }
