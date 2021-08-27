@@ -128,7 +128,7 @@ namespace Xam_test_01.Grane.Mehanika.Kinematika
             RiječnikPitanja = new Dictionary<int, string>
             {
                 { 1, $"Vrijeme vrtnje iznosi { Tijelo.VrijemeVrijednost } { dicFizVeličina.NazivMJ(Vrijeme) }. Koliko je potrebno da { Tijelo.Tijelo } " +
-                $"napravi puni krug, ako se {Tijelo.Okrenlo } { Tijelo.BrojOkretajaVrijednost } puta?" },
+                $"napravi puni krug, ako se {Tijelo.Okrenulo } { Tijelo.BrojOkretajaVrijednost } puta?" },
             };
             OdabirPitanja();
         }

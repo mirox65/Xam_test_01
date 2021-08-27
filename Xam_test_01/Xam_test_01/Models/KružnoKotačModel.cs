@@ -13,7 +13,7 @@ namespace Xam_test_01.Models
 
         public string Tijela { get; private set; }
 
-        public string Okrenuo { get; private set; }
+        public string Okrenulo { get; private set; }
 
         public string VeličinaMjerneJedinice { get; set; }
 
@@ -42,7 +42,7 @@ namespace Xam_test_01.Models
                 Tijelo = "kotač",
                 VSTijelo = "Kotač",
                 Tijela = "kotača",
-                Okrenuo = "okrenuo",
+                Okrenulo = "okrenuo",
                 VeličinaMjerneJedinice = "m, s",
                 BrojOkretajaVrijednost = BrojOkretajaVrijednost,
                 FrekvencijaVrijednost = FrekvencijaVrijednost,

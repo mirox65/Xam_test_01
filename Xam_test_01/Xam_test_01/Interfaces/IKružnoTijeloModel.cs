@@ -9,7 +9,7 @@ namespace Xam_test_01.Interfaces
         string Tijelo { get; }
         string VSTijelo { get; }
         string Tijela { get; }
-        string Okrenuo { get; }
+        string Okrenulo { get; }
         string VeličinaMjerneJedinice { get; }
         double BrojOkretajaVrijednost { get; }
         double FrekvencijaVrijednost { get; }
