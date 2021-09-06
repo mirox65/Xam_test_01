@@ -18,7 +18,7 @@ namespace Xam_test_01.ViewModels
             var postotak = Math.Round((double)correctAnswers / totalAnsswers * 100);
 
             Razina = $"Razina {level} ";
-            Ukupno = $"Rezulata {correctAnswers} / {totalAnsswers}";
+            Ukupno = $"Rezultat: {correctAnswers} / {totalAnsswers}";
             if(totalAnsswers == 0)
             {
                 postotak = 0;
